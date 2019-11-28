@@ -1,0 +1,10 @@
+Django
+mysqlclient
+django-mysql
+argcomplete
+autopep8
+beautifulsoup4
+chardet
+click
+configparser
+
