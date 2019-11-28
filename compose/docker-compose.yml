@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+ db-lavajato:
+   image: "thidemello/db-lavajato:1.0"
+   container_name: db-lavajato
+   environment:
+     - MYSQL_USER=root
+     - MYSQL_ROOT_PASSWORD=lavajato
+     - MYSQL_PASS=lavajato
+     - MYSQL_DATABASE=lavajato-db
+   ports:
+     - "3308:3308"
+   volumes:
+     - my-datavolume:/var/lib/mysql/
+   restart: always
+ 
+ phpmyadmin:
+   image: phpmyadmin/phpmyadmin
+   environment:
+     - PMA_ARBITRARY=1
+   restart: always
+   ports:
+     - 8082:80
+   volumes:
+     - /sessions
+
+ backend:
+   image: "thidemello/back-lavajato:1.0"
+   command: python manage.py runserver 0.0.0.0:8000
+   ports:
+      - "8000:8000"
+   depends_on:
+      - db-lavajato
+
+volumes:
+  my-datavolume:
