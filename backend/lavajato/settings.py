@@ -81,7 +81,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'lavajato',
         'HOST': 'db-lavajato',
-        'PORT': '3308',
+        'PORT': '3306',
     }
 }
 
