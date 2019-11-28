@@ -17,6 +17,7 @@ services:
  
  phpmyadmin:
    image: phpmyadmin/phpmyadmin
+   container_name: phpmyadmin
    environment:
      - PMA_ARBITRARY=1
    restart: always
@@ -27,11 +28,18 @@ services:
 
  backend:
    image: "thidemello/back-lavajato:1.0"
+   container_name: back-lavajat
    command: python manage.py runserver 0.0.0.0:8000
    ports:
       - "8000:8000"
    depends_on:
       - db-lavajato
+
+ frontend:
+   image: "thidemello/front-lavajato:1.0"
+   container_name: front-lavajato
+   ports: 
+     - "8001:8001"
 
 volumes:
   my-datavolume:
