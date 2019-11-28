@@ -12,6 +12,7 @@ services:
    volumes:
      - my-datavolume:/var/lib/mysql/
    restart: always
+   hostname: db-lavajato
  
  phpmyadmin:
    image: phpmyadmin/phpmyadmin
@@ -32,6 +33,7 @@ services:
       - "8000:8000"
    depends_on:
       - db-lavajato
+   link: db-lavajato
 
  frontend:
    image: "thidemello/front-lavajato:1.0"
