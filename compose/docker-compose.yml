@@ -9,8 +9,6 @@ services:
      - MYSQL_ROOT_PASSWORD=lavajato
      - MYSQL_PASS=lavajato
      - MYSQL_DATABASE=lavajato-db
-   ports:
-     - "3308:3308"
    volumes:
      - my-datavolume:/var/lib/mysql/
    restart: always
