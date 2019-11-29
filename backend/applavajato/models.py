@@ -61,8 +61,8 @@ class OrdemServico(models.Model):
    id_ordem = models.AutoField(primary_key=True)
    data_inicio = models.DateTimeField()
    data_fim = models.DateTimeField(blank=True, null=True)
-   matricula = models.ForeignKey(Funcionario, db_column='matricula')
-   placa = models.ForeignKey('Veiculo', db_column='placa')
+   matricula = models.ForeignKey(Funcionario, on_delete=models.CASCADE, db_column='matricula')
+   placa = models.ForeignKey('Veiculo', on_delete=models.CASCADE, db_column='placa')
    class Meta:
        managed = False
        db_table = 'ordem_servico'
@@ -90,8 +90,8 @@ class Servico(models.Model):
        db_table = 'servico'
  
 class ServicoNaOrdem(models.Model):
-   id_ordem = models.ForeignKey(OrdemServico, db_column='id_ordem', primary_key=True)
-   id_servico = models.ForeignKey(Servico, on_update=models.CASCADE, db_column='id_servico')
+   id_ordem = models.ForeignKey(OrdemServico, on_delete=models.DO_NOTHING, db_column='id_ordem', primary_key=True)
+   id_servico = models.ForeignKey(Servico, on_delete=models.DO_NOTHING, db_column='id_servico')
    class Meta:
        managed = False
        db_table = 'servico_na_ordem'
