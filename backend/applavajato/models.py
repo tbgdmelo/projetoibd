@@ -17,7 +17,7 @@ class Aluguel(models.Model):
    placa = models.ForeignKey('Veiculo', on_delete=models.CASCADE, db_column='placa', primary_key=True)
    empresa = models.CharField(max_length=15)
    class Meta:
-       managed = False
+      #  managed = False
        db_table = 'aluguel'
  
 class Cliente(models.Model):
@@ -25,14 +25,14 @@ class Cliente(models.Model):
    nome = models.CharField(max_length=85)
    endereco = models.CharField(max_length=150)
    class Meta:
-       managed = False
+      #  managed = False
        db_table = 'cliente'
  
 class ClienteSolicServico(models.Model):
    registro_pessoal = models.ForeignKey(Cliente, on_delete=models.CASCADE, db_column='registro_pessoal', primary_key=True)
    id_servico = models.ForeignKey('Servico', on_delete=models.CASCADE, db_column='id_servico')
    class Meta:
-       managed = False
+      #  managed = False
        db_table = 'cliente_solic_servico'
        unique_together = (('registro_pessoal', 'id_servico'),)
  
@@ -40,7 +40,7 @@ class ClienteVeiculo(models.Model):
    registro_pessoal = models.ForeignKey(Cliente, on_delete=models.CASCADE, db_column='registro_pessoal', primary_key=True)
    placa = models.ForeignKey('Veiculo', on_delete=models.CASCADE, db_column='placa')
    class Meta:
-       managed = False
+      #  managed = False
        db_table = 'cliente_veiculo'
        unique_together = (('registro_pessoal', 'placa'),)
  
@@ -54,7 +54,7 @@ class Funcionario(models.Model):
    senha = models.CharField(max_length=20)
    nivel = models.CharField(max_length=1)
    class Meta:
-       managed = False
+      #  managed = False
        db_table = 'funcionario'
  
 class OrdemServico(models.Model):
@@ -64,21 +64,21 @@ class OrdemServico(models.Model):
    matricula = models.ForeignKey(Funcionario, on_delete=models.CASCADE, db_column='matricula')
    placa = models.ForeignKey('Veiculo', on_delete=models.CASCADE, db_column='placa')
    class Meta:
-       managed = False
+      #  managed = False
        db_table = 'ordem_servico'
  
 class Particular(models.Model):
    placa = models.ForeignKey('Veiculo', on_delete=models.CASCADE, db_column='placa', primary_key=True)
    tipo = models.CharField(max_length=20)
    class Meta:
-       managed = False
+      #  managed = False
        db_table = 'particular'
  
 class Pesado(models.Model):
    placa = models.ForeignKey('Veiculo', on_delete=models.CASCADE, db_column='placa', primary_key=True)
    cargas = models.CharField(max_length=20)
    class Meta:
-       managed = False
+      #  managed = False
        db_table = 'pesado'
  
 class Servico(models.Model):
@@ -86,14 +86,14 @@ class Servico(models.Model):
    nome = models.CharField(max_length=50)
    valor = models.DecimalField(max_digits=5, decimal_places=2)
    class Meta:
-       managed = False
+      #  managed = False
        db_table = 'servico'
  
 class ServicoNaOrdem(models.Model):
    id_ordem = models.ForeignKey(OrdemServico, on_delete=models.DO_NOTHING, db_column='id_ordem', primary_key=True)
    id_servico = models.ForeignKey(Servico, on_delete=models.DO_NOTHING, db_column='id_servico')
    class Meta:
-       managed = False
+      #  managed = False
        db_table = 'servico_na_ordem'
        unique_together = (('id_ordem', 'id_servico'),)
  
@@ -101,7 +101,7 @@ class TelefoneCli(models.Model):
    registro_pessoal = models.ForeignKey(Cliente, on_delete=models.CASCADE, db_column='registro_pessoal', primary_key=True)
    telefone = models.CharField(max_length=14)
    class Meta:
-       managed = False
+      #  managed = False
        db_table = 'telefone_cli'
        unique_together = (('registro_pessoal', 'telefone'),)
  
@@ -109,7 +109,7 @@ class TelefoneFunc(models.Model):
    matricula = models.ForeignKey(Funcionario, on_delete=models.CASCADE, db_column='matricula', primary_key=True)
    telefone = models.CharField(max_length=14)
    class Meta:
-       managed = False
+      #  managed = False
        db_table = 'telefone_func'
        unique_together = (('matricula', 'telefone'),)
  
