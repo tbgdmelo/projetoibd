@@ -2,15 +2,9 @@ CREATE TABLE cliente(
 	registro_pessoal varchar (11),
 	nome  varchar(85) NOT NULL,
 	endereco  varchar(150) NOT NULL,
+	telefone1 varchar(14) NOT NULL,
+	telefone2 varchar(14) NOT NULL,
 	PRIMARY KEY (registro_pessoal)
-);
-
-CREATE TABLE telefone_cli(
-	registro_pessoal varchar(11),
-	telefone varchar(14) NOT NULL,
-	PRIMARY KEY (registro_pessoal, telefone),
-	FOREIGN KEY (registro_pessoal) REFERENCES cliente (registro_pessoal)
-	ON DELETE CASCADE
 );
 
 CREATE TABLE servico(
@@ -26,9 +20,11 @@ CREATE TABLE funcionario(
 	nome VARCHAR(85) NOT NULL,
 	endereco VARCHAR(150) NOT NULL,
 	funcao VARCHAR(30) NOT NULL,
-	login VARCHAR(32) NOT NULL,
+	usuario VARCHAR(32) NOT NULL,
 	senha VARCHAR(20) NOT NULL,
 	nivel VARCHAR(1) NOT NULL,
+	telefone1 varchar(14) NOT NULL,
+	telefone2 varchar(14) NOT NULL,
 	PRIMARY KEY (matricula)
 );
 
@@ -76,7 +72,7 @@ CREATE TABLE particular(
 CREATE TABLE ordem_servico(
 	id_ordem INT AUTO_INCREMENT,
 	data_inicio TIMESTAMP NOT NULL,
-	data_fim TIMESTAMP,
+	data_fim TIMESTAMP NULL,
 	matricula INT NOT NULL,
 	placa VARCHAR(7) NOT NULL,
 	PRIMARY KEY (id_ordem),
