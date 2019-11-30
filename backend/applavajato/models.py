@@ -24,6 +24,8 @@ class Cliente(models.Model):
    registro_pessoal = models.CharField(primary_key=True, max_length=11)
    nome = models.CharField(max_length=85)
    endereco = models.CharField(max_length=150)
+   telefone1 = models.CharField(max_length=14)
+   telefone2 = models.CharField(max_length=14)
    class Meta:
       #  managed = False
        db_table = 'cliente'
@@ -50,9 +52,11 @@ class Funcionario(models.Model):
    nome = models.CharField(max_length=85)
    endereco = models.CharField(max_length=150)
    funcao = models.CharField(max_length=30)
-   login = models.CharField(max_length=32)
+   usuario = models.CharField(max_length=32)
    senha = models.CharField(max_length=20)
    nivel = models.CharField(max_length=1)
+   telefone1 = models.CharField(max_length=14)
+   telefone2 = models.CharField(max_length=14)
    class Meta:
       #  managed = False
        db_table = 'funcionario'
@@ -96,7 +100,8 @@ class ServicoNaOrdem(models.Model):
       #  managed = False
        db_table = 'servico_na_ordem'
        unique_together = (('id_ordem', 'id_servico'),)
- 
+
+"""
 class TelefoneCli(models.Model):
    registro_pessoal = models.ForeignKey(Cliente, on_delete=models.CASCADE, db_column='registro_pessoal', primary_key=True)
    telefone = models.CharField(max_length=14)
@@ -104,7 +109,7 @@ class TelefoneCli(models.Model):
       #  managed = False
        db_table = 'telefone_cli'
        unique_together = (('registro_pessoal', 'telefone'),)
- 
+
 class TelefoneFunc(models.Model):
    matricula = models.ForeignKey(Funcionario, on_delete=models.CASCADE, db_column='matricula', primary_key=True)
    telefone = models.CharField(max_length=14)
@@ -112,7 +117,7 @@ class TelefoneFunc(models.Model):
       #  managed = False
        db_table = 'telefone_func'
        unique_together = (('matricula', 'telefone'),)
- 
+ """
 class Veiculo(models.Model):
    placa = models.CharField(primary_key=True, max_length=7)
    cor = models.CharField(max_length=25)
