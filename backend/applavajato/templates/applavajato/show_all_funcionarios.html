@@ -4,9 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Funcionários Cadastrados</title>
 </head>
+<center><h1>Funcionários Cadastrados</h1></center>
 <body>
-    
+    <table>
+        <thead>
+            <tr>
+                <th>Matricula</th>
+                <th>Registro Pessoal</th>
+                <th>Nome</th>
+                <th>Endereço</th>
+                <th>Função</th>
+                <th>Usuario</th>
+                <th>Senha</th>
+                <th>Nivel de Usuário</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for funcionario in funcionarios %}
+            <tr>
+                <td>{{ funcionario.matricula }}</td>
+                <td>{{ funcionario.registro_pessoal }}</td>
+                <td>{{ funcionario.nome }}</td>
+                <td>{{ funcionario.endereco }}</td>
+                <td>{{ funcionario.funcao }}</td>
+                <td>{{ funcionario.usuario }}</td>
+                <td>{{ funcionario.senha }}</td>
+                <td>{{ funcionario.nivel }}</td>
+                <td>
+                    <a href="/edit_func/{{ funcionario.matricula }}">Editar</a>
+                    <a href="/delete_func/{{ funcionario.matricula }}">Deletar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <center><a href='/cadastro_func'>Cadastrar Novo Funcionário</a></center>
 </body>
 </html>

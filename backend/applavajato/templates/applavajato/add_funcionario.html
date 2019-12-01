@@ -9,64 +9,11 @@
 <center><h1>Cadastro de Funcionário</h1></center>
 <h4>Dados do Funcionário</h4>
 <body>
-    <form action="">
-    <!-- area de campos do form -->
-    <hr />
-    <div>
-    	<div>
-            <label for="name">Matricula:</label>
-            <input type="text" autofocus="" placeholder="Nº de Matricula">
-        </div>
-        <div>
-        	</br>
-            <label for="name">Registro Pessoal:</label>
-            <input type="text" placeholder="CPF ou nº Registro Imigrante">
-        </div>
-        <div>
-        	</br>
-            <label for="name">Nome:</label>
-            <input type="text" placeholder="Nome Completo">
-        </div>
-        <div>
-        	</br>
-            <label for="name">Endereço:</label>
-            <input type="text" placeholder="Endereço Completo">
-        </div>
-        <div>
-        	</br>
-            <label for="name">Função:</label>
-            <input type="text" placeholder="Função">
-        </div>
-        <div>
-        	</br>
-            <label for="name">Login:</label>
-            <input type="text" placeholder="Login no Sistema">
-        </div>
-        <div>
-        	</br>
-            <label for="name">Senha:</label>
-            <input type="password" placeholder="Senha">
-        </div>
-        <div>
-        </br>
-        <label>Telefone:</label>
-        <input type="text" autofocus="" placeholder="Telefone">
-    </div>
-    <div>
-        </br>
-        <button>Adicionar Telefone</button>
-        </br>
-    </div>
-        </br>
-        <label for="name">Nível de Usuário:</label>
-        </br>
-  		<input type="radio" name="nivel" value="0" checked> Comum<br>
-  		<input type="radio" name="nivel" value="1"> Administrador<br>
-    <div>
-        	</br>
-            <button>Salvar</button>
-            <button>Cancelar</button>
-        </div>
-    </div>
+    <form method="POST" action="/cadastro_func">
+        {% csrf_token %} 
+        {{ form.as_p }}
+    </br>
+    <button type="submit" >Salvar</button>
+    <a href="/show_all_func">Cancelar</a>
 </body>
-</html>
+</html> 

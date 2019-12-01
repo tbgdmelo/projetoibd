@@ -47,6 +47,11 @@ class ClienteVeiculo(models.Model):
        unique_together = (('registro_pessoal', 'placa'),)
  
 class Funcionario(models.Model):
+   NIVEIS_CHOICES = [
+      ["0", "Comum"],
+      ["1", "Administrador"]
+   ]
+
    matricula = models.AutoField(primary_key=True)
    registro_pessoal = models.CharField(max_length=11)
    nome = models.CharField(max_length=85)
@@ -54,7 +59,7 @@ class Funcionario(models.Model):
    funcao = models.CharField(max_length=30)
    usuario = models.CharField(max_length=32)
    senha = models.CharField(max_length=20)
-   nivel = models.CharField(max_length=1)
+   nivel = models.CharField(max_length=1, choices=NIVEIS_CHOICES)
    telefone1 = models.CharField(max_length=14)
    telefone2 = models.CharField(max_length=14)
    class Meta:

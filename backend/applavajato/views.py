@@ -33,30 +33,34 @@ def cadastro_func(request):
         if form.is_valid():
             try:
                 form.save()
-                return redirect('applavajato/show_funcionario.html')
+                return redirect('/show_all_func')
             except:
                 pass
     else:
         form = FuncionarioForm()
     return render(request, 'applavajato/add_funcionario.html', {'form':form})
 
-def show_func(request):
+def show_all_func(request):
     funcionarios = Funcionario.objects.all()
-    return render(reques, 'applavajato/show_all_funcionarios.html', {'funcionarios':funcionario})
+    return render(request, 'applavajato/show_all_funcionarios.html', {'funcionarios':funcionarios})
 
-def edit_func(request):
+def show_func(request, matricula):
     funcionario = Funcionario.objects.get(matricula=matricula)
-    return render(request, 'applavajato/edit_funcionario.html', {'funcionario', funcionario})
+    return render(request, 'applavajato/show_funcionario.html', {'funcionario': funcionario})
 
-def update_func(request):
+def edit_func(request, matricula):
+    funcionario = Funcionario.objects.get(matricula=matricula)
+    return render(request, 'applavajato/edit_funcionario.html', {'funcionario': funcionario})
+
+def update_func(request, matricula):
     funcionario = Funcionario.objects.get(matricula=matricula)
     form = FuncionarioForm (request.POST, instance=funcionario)
     if form.is_valid():
         form.save
-        return redirect('applavajato/show_funcionario.html')
-    return render(request, 'applavajato/edit_funcionario.html', {'funcionario', funcionario})
+        return redirect('show_all_func')
+    return render(request, 'applavajato/edit_funcionario.html', {'funcionario': funcionario})
 
-def delete_func(request):
+def delete_func(request, matricula):
     funcionario = Funcionario.objects.get(matricula=matricula)
     funcionario.delete()
-    return redirect('applavajato/show_all_funcionarios.html')
+    return redirect('/show_all_func')
