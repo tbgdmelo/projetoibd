@@ -16,14 +16,19 @@
     <hr />
     <div>
         <div>
-            <label>Nome: </label>
-            <input type="text" name="Nome" id="f_nome"  value="{{ servico.nome }}">
+            <label for="id_nome">Id do Serviço: </label>
+            <input disabled="true" type="text" name="id_servico" id="id_id_servico"  value="{{ servico.id_servico }}">
+        </div>
+        <div>
+            </br>
+            <label for="id_nome">Nome: </label>
+            <input type="text" name="nome" id="id_nome"  value="{{ servico.nome }}">
         </div>
 
         <div>
             </br>
-            <label for="name">Valor: </label>
-            <input name="valor" id="f_valor"  value="{{ servico.valor }}">
+            <label for="id_valor">Valor: </label>
+            <input name="valor" id="id_valor"  value="{{ servico.valor }}">
         </div>
     </div>
     

@@ -64,10 +64,12 @@ def edit_func(request, matricula):
 
 def update_func(request, matricula):
     funcionario = Funcionario.objects.get(matricula=matricula)
-    form = FuncionarioForm (request.POST, instance=funcionario)
-    if form.is_valid():
-        form.save
-        return redirect('show_all_func')
+    if request.method == "POST":
+        form = FuncionarioForm(request.POST, instance=funcionario)
+        if form.is_valid():
+            funcionario = form.save(commit=False)
+            funcionario.save()
+            return redirect('/show_all_func')
     return render(request, 'applavajato/edit_funcionario.html', {'funcionario': funcionario})
 
 def delete_func(request, matricula):
@@ -89,10 +91,12 @@ def edit_serv(request, id_servico):
 
 def update_serv(request, id_servico):
     servico = Servico.objects.get(id_servico=id_servico)
-    form = ServicoForm (request.POST, instance=servico)
-    if form.is_valid():
-        form.save
-        return redirect('show_all_serv')
+    if request.method == "POST":
+        form = ServicoForm (request.POST, instance=servico)
+        if form.is_valid():
+            funcionario = form.save(commit=False)
+            funcionario.save()
+            return redirect('/show_all_serv')
     return render(request, 'applavajato/edit_servico.html', {'servico': servico})
 
 def delete_serv(request, id_servico):
