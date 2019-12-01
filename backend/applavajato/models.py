@@ -129,3 +129,6 @@ class Veiculo(models.Model):
    modelo = models.CharField(max_length=30)
    fabricante = models.CharField(max_length=15)
    avarias = models.CharField(max_length=400, blank=True, null=True)
+
+   class Meta:
+      db_table = 'veiculo'

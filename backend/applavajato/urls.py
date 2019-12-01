@@ -20,7 +20,12 @@ urlpatterns = [
     path('show_serv/<int:id_servico>', views.show_serv, name='mostrar_um_servico'),
     path('edit_serv/<int:id_servico>', views.edit_serv, name='editar_servico'),
     path('update_serv/<int:id_servico>', views.update_serv, name='atualizar_servico'),
-    path('delete_serv/<int:id_servico>', views.delete_serv, name='deletar_servico')
-    
-    
+    path('delete_serv/<int:id_servico>', views.delete_serv, name='deletar_servico'),
+
+    path('show_all_veic', views.show_all_veic, name='mostrar_veiculos'),
+    path('show_veic/<str:placa>', views.show_veic, name='mostrar_um_veiculo'),
+    path('edit_veic/<str:placa>', views.edit_veic, name='editar_veiculo'),
+    path('update_veic/<str:placa>', views.update_veic, name='atualizar_veiculo'),
+    path('delete_veic/<str:placa>', views.delete_veic, name='deletar_veiculo')
+
 ]

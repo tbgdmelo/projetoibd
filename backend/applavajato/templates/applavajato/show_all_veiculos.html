@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Veículos Cadastrados</title>
+</head>
+<center><h1>Veículos Cadastrados</h1></center>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Placa</th>
+                <th>Cor</th>
+                <th>Modelo</th>
+                <th>Fabricante</th>
+                <th>Avarias</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for veiculo in veiculos %}
+            <tr>
+                <td>{{ veiculo.placa }}</td>
+                <td>{{ veiculo.cor }}</td>
+                <td>{{ veiculo.modelo }}</td>
+                <td>{{ veiculo.fabricante }}</td>
+                <td>{{ veiculo.avarias }}</td>
+                <td>
+                    <a href="/edit_veic/{{ veiculo.placa }}">Editar</a>
+                    <a href="/delete_veic/{{ veiculo.placa }}">Deletar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <center><a href='/cadastro_veic'>Cadastrar Novo Veículo</a></center>
+</body>
+</html>
