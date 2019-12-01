@@ -3,9 +3,9 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render,redirect
 
-from applavajato.forms import FuncionarioForm
+from applavajato.forms import *
 
-from applavajato.models import Funcionario
+from applavajato.models import *
 
 # Create your views here.
 
@@ -22,7 +22,17 @@ def select_report(request):
     return render(request, 'applavajato/select_relatorio.html', {})
 
 def cadastro_serv(request):
-    return render(request, 'applavajato/add_servico.html', {})
+    if request.method == "POST":
+        form = ServicoForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('/show_all_serv')
+            except:
+                Exception("Form not valid!")
+    else:
+        form = ServicoForm()
+    return render(request, 'applavajato/add_servico.html', {'form':form})
 
 def cadastro_nota(request):
     return render(request, 'applavajato/add_nota.html', {})
@@ -64,3 +74,27 @@ def delete_func(request, matricula):
     funcionario = Funcionario.objects.get(matricula=matricula)
     funcionario.delete()
     return redirect('/show_all_func')
+
+def show_all_serv(request):
+    return render(request, 'applavajato/show_all_servicos.html', {})
+
+def show_serv(request, id_servico):
+    servico = Servico.objects.get(id_servico=id_servico)
+    return render(request, 'applavajato/show_servico.html', {'servico': servico})
+
+def edit_serv(request, id_servico):
+    servico = Servico.objects.get(id_servico=id_servico)
+    return render(request, 'applavajato/edit_servico.html', {'servico': servico})
+
+def update_serv(request, id_servico):
+    servico = Servico.objects.get(id_servico=id_servico)
+    form = ServicoForm (request.POST, instance=servico)
+    if form.is_valid():
+        form.save
+        return redirect('show_all_serv')
+    return render(request, 'applavajato/edit_servico.html', {'servico': servico})
+
+def delete_serv(request, id_servico):
+    servico = Servico.objects.get(id_servico=id_servico)
+    servico.delete()
+    return redirect('/show_all_serv')

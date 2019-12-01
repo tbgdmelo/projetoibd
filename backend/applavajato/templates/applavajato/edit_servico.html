@@ -1,0 +1,37 @@
+<!-- <p>Hi, i'm Edit Servico</p> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Atualizar Serviço</title>
+</head>
+<center><h1>Atualizar dados do Serviço</h1></center>
+<h4>Dados do Serviço</h4>
+<body>
+  <form method="POST" action="/update_serv/{{servico.id_servico}}">
+        {% csrf_token %}  
+    <!-- area de campos do form -->
+    <hr />
+    <div>
+        <div>
+            <label>Nome: </label>
+            <input type="text" name="Nome" id="f_nome"  value="{{ servico.nome }}">
+        </div>
+
+        <div>
+            </br>
+            <label for="name">Valor: </label>
+            <input name="valor" id="f_valor"  value="{{ servico.valor }}">
+        </div>
+    </div>
+    
+      </br>
+      <button type="submit" >Salvar</button>
+      <a href='/../show_all_serv'>Cancelar</a>
+    </div>
+    
+</form>
+</body>
+</html>

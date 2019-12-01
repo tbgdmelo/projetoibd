@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Serviços Cadastrados</title>
+</head>
+<center><h1>Serviços Cadastrados</h1></center>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Serviço</th>
+                <th>Nome</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for servico in servicos %}
+            <tr>
+                <td>{{ servico.id_servico }}</td>
+                <td>{{ servico.nome }}</td>
+                <td>{{ servico.valor }}</td>
+                <td>
+                    <a href="/edit_serv/{{ servico.id_servico }}">Editar</a>
+                    <a href="/delete_serv/{{ servico.id_servico }}">Deletar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <center><a href='/cadastro_serv'>Cadastrar Novo Serviço</a></center>
+</body>
+</html>

@@ -1,5 +1,5 @@
 from django import forms
-from applavajato.models import Funcionario
+from applavajato.models import *
 
 niveis= (
     ('0','Comum'),
@@ -11,3 +11,7 @@ class FuncionarioForm(forms.ModelForm):
         model = Funcionario
         fields = "__all__"
 
+class ServicoForm(forms.ModelForm):
+    class Meta:
+        model = Servico
+        fields = "__all__"

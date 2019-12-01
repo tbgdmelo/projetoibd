@@ -14,5 +14,13 @@ urlpatterns = [
     path('show_func/<int:matricula>', views.show_func, name='mostrar_um_funcionario'),
     path('edit_func/<int:matricula>', views.edit_func, name='editar_funcionario'),
     path('update_func/<int:matricula>', views.update_func, name='atualizar_funcionario'),
-    path('delete_func/<int:matricula>', views.delete_func, name='deletar_funcionario')
+    path('delete_func/<int:matricula>', views.delete_func, name='deletar_funcionario'),
+
+    path('show_all_serv', views.show_all_serv, name='mostrar_servicos'),
+    path('show_serv/<int:id_servico>', views.show_serv, name='mostrar_um_servico'),
+    path('edit_serv/<int:id_servico>', views.edit_serv, name='editar_servico'),
+    path('update_serv/<int:id_servico>', views.update_serv, name='atualizar_servico'),
+    path('delete_serv/<int:id_servico>', views.delete_serv, name='deletar_servico')
+    
+    
 ]
