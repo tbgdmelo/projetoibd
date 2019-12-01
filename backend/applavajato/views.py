@@ -76,7 +76,8 @@ def delete_func(request, matricula):
     return redirect('/show_all_func')
 
 def show_all_serv(request):
-    return render(request, 'applavajato/show_all_servicos.html', {})
+    servicos = Servico.objects.all()
+    return render(request, 'applavajato/show_all_servicos.html', {'servicos':servicos})
 
 def show_serv(request, id_servico):
     servico = Servico.objects.get(id_servico=id_servico)
