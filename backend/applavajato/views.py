@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 
 from applavajato.forms import *
 
@@ -65,15 +65,15 @@ def show_all_func(request):
     return render(request, 'applavajato/show_all_funcionarios.html', {'funcionarios':funcionarios})
 
 def show_func(request, matricula):
-    funcionario = Funcionario.objects.get(matricula=matricula)
+    funcionario = get_object_or_404(Funcionario, matricula=matricula)
     return render(request, 'applavajato/show_funcionario.html', {'funcionario': funcionario})
 
 def edit_func(request, matricula):
-    funcionario = Funcionario.objects.get(matricula=matricula)
+    funcionario = get_object_or_404(Funcionario, matricula=matricula)
     return render(request, 'applavajato/edit_funcionario.html', {'funcionario': funcionario})
 
 def update_func(request, matricula):
-    funcionario = Funcionario.objects.get(matricula=matricula)
+    funcionario = get_object_or_404(Funcionario, matricula=matricula)
     if request.method == "POST":
         form = FuncionarioForm(request.POST, instance=funcionario)
         if form.is_valid():
@@ -83,7 +83,7 @@ def update_func(request, matricula):
     return render(request, 'applavajato/edit_funcionario.html', {'funcionario': funcionario})
 
 def delete_func(request, matricula):
-    funcionario = Funcionario.objects.get(matricula=matricula)
+    funcionario = get_object_or_404(Funcionario, matricula=matricula)
     funcionario.delete()
     return redirect('/show_all_func')
 
@@ -92,15 +92,15 @@ def show_all_serv(request):
     return render(request, 'applavajato/show_all_servicos.html', {'servicos':servicos})
 
 def show_serv(request, id_servico):
-    servico = Servico.objects.get(id_servico=id_servico)
+    servico = get_object_or_404(Servico, id_servico=id_servico)
     return render(request, 'applavajato/show_servico.html', {'servico': servico})
 
 def edit_serv(request, id_servico):
-    servico = Servico.objects.get(id_servico=id_servico)
+    servico = get_object_or_404(Servico, id_servico=id_servico)
     return render(request, 'applavajato/edit_servico.html', {'servico': servico})
 
 def update_serv(request, id_servico):
-    servico = Servico.objects.get(id_servico=id_servico)
+    servico = get_object_or_404(Servico, id_servico=id_servico)
     if request.method == "POST":
         form = ServicoForm (request.POST, instance=servico)
         if form.is_valid():
@@ -110,7 +110,7 @@ def update_serv(request, id_servico):
     return render(request, 'applavajato/edit_servico.html', {'servico': servico})
 
 def delete_serv(request, id_servico):
-    servico = Servico.objects.get(id_servico=id_servico)
+    servico = get_object_or_404(Servico, id_servico=id_servico)
     servico.delete()
     return redirect('/show_all_serv')
 
@@ -119,17 +119,17 @@ def show_all_veic(request):
     return render(request, 'applavajato/show_all_veiculos.html', {'veiculos':veiculos})
 
 def show_veic(request, placa):
-    veiculo = Veiculo.objects.get(placa=placa)
+    veiculo = get_object_or_404(Veiculo, placa=placa)
     return render(request, 'applavajato/show_veiculo.html', {'veiculo': veiculo})
 
 def edit_veic(request, placa):
-    veiculo = Veiculo.objects.get(placa=placa)
+    veiculo = get_object_or_404(Veiculo, placa=placa)
     return render(request, 'applavajato/edit_veiculo.html', {'veiculo': veiculo})
 
 def update_veic(request, placa):
-    veiculo = Veiculo.objects.get(placa=placa)
+    veiculo = get_object_or_404(Veiculo, placa=placa)
     if request.method == "POST":
-        form = VeiculoForm (request.POST, instance=veiculo)
+        form = EditVeiculoForm (request.POST, instance=veiculo)
         if form.is_valid():
             veiculo = form.save(commit=False)
             veiculo.save()
@@ -137,7 +137,7 @@ def update_veic(request, placa):
     return render(request, 'applavajato/edit_veiculo.html', {'veiculo': veiculo})
 
 def delete_veic(request, placa):
-    veiculo = Veiculo.objects.get(placa=placa)
+    veiculo = get_object_or_404(Veiculo, placa=placa)
     veiculo.delete()
     return redirect('/show_all_veic')
     

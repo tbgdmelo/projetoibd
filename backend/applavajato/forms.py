@@ -20,3 +20,8 @@ class VeiculoForm(forms.ModelForm):
     class Meta:
         model = Veiculo
         fields = "__all__"
+
+class EditVeiculoForm(forms.ModelForm):
+    class Meta:
+        model = Veiculo
+        fields = ['cor', 'modelo', 'fabricante', 'avarias']

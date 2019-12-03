@@ -1,1 +1,41 @@
-<p>Hi there, i'm Show 1 Servico.</p>
+<!-- <p>Hi, i'm Edit Servico</p> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Atualizar Serviço</title>
+</head>
+<center><h1>Atualizar dados do Serviço</h1></center>
+<h4>Dados do Serviço</h4>
+<body>
+  <form>
+        {% csrf_token %}  
+    <!-- area de campos do form -->
+    <hr />
+    <div>
+        <div>
+            <label for="id_nome">Id do Serviço: </label>
+            <input disabled="true" type="text" name="id_servico" id="id_id_servico"  value="{{ servico.id_servico }}">
+        </div>
+        <div>
+            </br>
+            <label for="id_nome">Nome: </label>
+            <input disabled="disabled" type="text" name="nome" id="id_nome"  value="{{ servico.nome }}">
+        </div>
+
+        <div>
+            </br>
+            <label for="id_valor">Valor: </label>
+            <input disabled="disabled" name="valor" id="id_valor"  value="{{ servico.valor }}">
+        </div>
+    </div>
+    
+      </br>
+      <a href='/../show_all_serv'>Voltar</a>
+    </div>
+    
+</form>
+</body>
+</html>
