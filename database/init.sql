@@ -3,7 +3,7 @@ CREATE TABLE cliente(
 	nome  varchar(85) NOT NULL,
 	endereco  varchar(150) NOT NULL,
 	telefone1 varchar(14) NOT NULL,
-	telefone2 varchar(14) NOT NULL,
+	telefone2 varchar(14),
 	PRIMARY KEY (registro_pessoal)
 );
 
@@ -24,17 +24,17 @@ CREATE TABLE funcionario(
 	senha VARCHAR(20) NOT NULL,
 	nivel VARCHAR(1) NOT NULL,
 	telefone1 varchar(14) NOT NULL,
-	telefone2 varchar(14) NOT NULL,
+	telefone2 varchar(14),
 	PRIMARY KEY (matricula)
 );
 
-CREATE TABLE telefone_func(
-	matricula INT,
-	telefone VARCHAR(14) NOT NULL,
-	PRIMARY KEY (matricula, telefone),
-	FOREIGN KEY (matricula) REFERENCES funcionario (matricula)
-	ON DELETE CASCADE
-);
+--CREATE TABLE telefone_func(
+--	matricula INT,
+--	telefone VARCHAR(14) NOT NULL,
+--	PRIMARY KEY (matricula, telefone),
+--	FOREIGN KEY (matricula) REFERENCES funcionario (matricula)
+--	ON DELETE CASCADE
+--);
 
 CREATE TABLE veiculo(
 	placa VARCHAR(7),
