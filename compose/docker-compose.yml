@@ -12,7 +12,7 @@ services:
      - /sessions
 
  db-lavajato:
-   image: "thidemello/db-lavajato:2.0"
+   image: "thidemello/db-lavajato:3.0"
    container_name: db-lavajato
    environment:
      - MYSQL_USER=root
