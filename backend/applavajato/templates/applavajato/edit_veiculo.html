@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Atualizar Veiculo</title>
+</head>
+<center><h1>Atualizar dados do Veiculo</h1></center>
+<h4>Dados do Veiculo</h4>
+<body>
+    <form method="POST" action="{% url 'atualizar_veiculo' placa=veiculo.placa%}">
+        {% csrf_token %}  
+    <!-- area de campos do form -->
+    <hr/>
+    <div>
+        <div>
+        </br>
+        <label for="id_placa">Placa:</label>
+        <input disabled="true" type="text" name="placa" id="id_placa"  value="{{ veiculo.placa }}"/>  
+    </div>
+    <div>
+        </br>
+        <label for="id_cor">Cor:</label>
+        <input type="text" name="cor" id="id_cor"  value="{{ veiculo.cor }}"/> 
+    </div>
+    <div>
+        </br>
+        <label for="id_modelo">Modelo:</label>
+        <input type="text" name="modelo" id="id_modelo"  value="{{ veiculo.modelo }}"/>   
+    </div>
+    <div>
+        </br>
+        <label for="id_fabricante">Fabricante:</label>
+        <input type="text" name="fabricante" id="id_fabricante"  value="{{ veiculo.fabricante }}"/>  
+    </div>
+    <div>
+        </br>
+        <label for="id_avarias">Avarias:</label>
+        <input type="text" name="avarias" id="id_avarias"  value="{{ veiculo.avarias }}"/> 
+    </div>
+    <div>
+        </br>
+        <button type="submit" >Salvar</button>
+        <a href='/../show_all_veic'>Cancelar</a>
+    </div>
+    </div>
+</body>
+</html>
