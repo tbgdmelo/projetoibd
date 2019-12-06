@@ -25,3 +25,13 @@ class EditVeiculoForm(forms.ModelForm):
     class Meta:
         model = Veiculo
         fields = ['cor', 'modelo', 'fabricante', 'avarias']
+
+class ClienteForm(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        fields = "__all__"
+
+class EditClienteForm(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        fields = "__all__"

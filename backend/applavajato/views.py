@@ -12,9 +12,6 @@ from applavajato.models import *
 def login(request):
     return render(request, 'applavajato/login.html', {})
 
-def cadastro_cli(request):
-    return render(request, 'applavajato/add_cliente.html',{})
-
 def cadastro_veic(request):
     if request.method == "POST":
         form = VeiculoForm(request.POST)
@@ -140,4 +137,43 @@ def delete_veic(request, placa):
     veiculo = get_object_or_404(Veiculo, placa=placa)
     veiculo.delete()
     return redirect('/show_all_veic')
-    
+
+def cadastro_cli(request):
+    if request.method == "POST":
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('/show_all_cli')
+            except:
+                pass
+    else:
+        form = ClienteForm()
+    return render(request, 'applavajato/add_cliente.html', {'form':form})
+
+def show_all_cli(request):
+    clientes = Cliente.objects.all()
+    return render(request, 'applavajato/show_all_clientes.html', {'clientes':clientes})
+
+def show_cli(request, registro_pessoal):
+    cliente = get_object_or_404(Cliente, registro_pessoal=registro_pessoal)
+    return render(request, 'applavajato/show_cliente.html', {'cliente': cliente})
+
+def edit_cli(request, registro_pessoal):
+    cliente = get_object_or_404(Cliente, registro_pessoal=registro_pessoal)
+    return render(request, 'applavajato/edit_cliente.html', {'cliente': cliente})
+
+def update_cli(request, registro_pessoal):
+    cliente = get_object_or_404(Cliente, registro_pessoal=registro_pessoal)
+    if request.method == "POST":
+        form = EditClienteForm (request.POST, instance=cliente)
+        if form.is_valid():
+            cliente = form.save(commit=False)
+            cliente.save()
+            return redirect('/show_all_cli')
+    return render(request, 'applavajato/edit_cliente.html', {'cliente': cliente})
+
+def delete_cli(request, registro_pessoal):
+    cliente = get_object_or_404(Cliente, registro_pessoal=registro_pessoal)
+    cliente.delete()
+    return redirect('/show_all_cli')

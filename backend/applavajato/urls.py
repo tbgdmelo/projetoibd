@@ -26,6 +26,12 @@ urlpatterns = [
     path('show_veic/<str:placa>', views.show_veic, name='mostrar_um_veiculo'),
     path('edit_veic/<str:placa>', views.edit_veic, name='editar_veiculo'),
     path('update_veic/<str:placa>', views.update_veic, name='atualizar_veiculo'),
-    path('delete_veic/<str:placa>', views.delete_veic, name='deletar_veiculo')
+    path('delete_veic/<str:placa>', views.delete_veic, name='deletar_veiculo'),
+
+    path('show_all_cli', views.show_all_cli, name='mostrar_clientes'),
+    path('show_cli/<str:registro_pessoal>', views.show_cli, name='mostrar_um_cliente'),
+    path('edit_cli/<str:registro_pessoal>', views.edit_cli, name='editar_cliente'),
+    path('update_cli/<str:registro_pessoal>', views.update_cli, name='atualizar_cliente'),
+    path('delete_cli/<str:registro_pessoal>', views.delete_cli, name='deletar_cliente')
 
 ]

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clientes Cadastrados</title>
+</head>
+<center><h1>Clientes Cadastrados</h1></center>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Registro Pessoal</th>
+                <th>Nome</th>
+                <th>Endereço</th>
+                <th>Telefone 1</th>
+                <th>Telefone 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente.registro_pessoal }}</td>
+                <td>{{ cliente.nome }}</td>
+                <td>{{ cliente.endereco }}</td>
+                <td>{{ cliente.telefone1 }}</td>
+                <td>{{ cliente.telefone2 }}</td>
+                <td>
+                    <a href="/show_cli/{{ cliente.registro_pessoal }}">Visualizar</a>
+                    <a href="/edit_cli/{{ cliente.registro_pessoal }}">Editar</a>
+                    <a href="/delete_cli/{{ cliente.registro_pessoal }}">Deletar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <center><a href='/cadastro_cli'>Cadastrar Novo Cliente</a></center>
+</body>
+</html>

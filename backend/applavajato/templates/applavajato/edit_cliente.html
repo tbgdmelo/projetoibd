@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Atualizar Cliente</title>
+</head>
+<center><h1>Atualizar dados do Cliente</h1></center>
+<h4>Dados do Cliente</h4>
+<body>
+    <form method="POST" action="{% url 'atualizar_cliente' registro_pessoal=cliente.registro_pessoal%}">
+        {% csrf_token %}  
+    <!-- area de campos do form -->
+    <hr/>
+    <div>
+        <div>
+        </br>
+        <label for="id_registro_pessoal">Nº de Registro Pessoal:</label>
+        <input type="text" name="registro_pessoal" id="id_registro_pessoal"  value="{{ cliente.registro_pessoal }}"/>  
+    </div>
+    <div>
+        </br>
+        <label for="id_nome">Nome:</label>
+        <input type="text" name="nome" id="id_nome"  value="{{ cliente.nome }}"/> 
+    </div>
+    <div>
+        </br>
+        <label for="id_endereco">Endereço:</label>
+        <input type="text" name="endereco" id="id_endereco"  value="{{ cliente.endereco }}"/>   
+    </div>
+    <div>
+        </br>
+        <label for="id_telefone1">Telefone 1:</label>
+        <input type="text" name="telefone1" id="id_telefone1"  value="{{ cliente.telefone1 }}"/>  
+    </div>
+    <div>
+        </br>
+        <label for="id_telefone2">Telefone 2:</label>
+        <input type="text" name="telefone2" id="id_telefone2"  value="{{ cliente.telefone2 }}"/> 
+    </div>
+    <div>
+        </br>
+        <button type="submit" >Salvar</button>
+        <a href='/../show_all_cli'>Cancelar</a>
+    </div>
+    </div>
+</body>
+</html>
