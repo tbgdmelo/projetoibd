@@ -15,7 +15,7 @@ CREATE TABLE servico(
 );
 
 CREATE TABLE funcionario(
-	matricula  INT AUTO_INCREMENT,
+	matricula INT AUTO_INCREMENT,
 	registro_pessoal VARCHAR(11) NOT NULL,
 	nome VARCHAR(85) NOT NULL,
 	endereco VARCHAR(150) NOT NULL,
@@ -28,26 +28,32 @@ CREATE TABLE funcionario(
 	PRIMARY KEY (matricula)
 );
 
---CREATE TABLE telefone_func(
---	matricula INT,
---	telefone VARCHAR(14) NOT NULL,
---	PRIMARY KEY (matricula, telefone),
---	FOREIGN KEY (matricula) REFERENCES funcionario (matricula)
---	ON DELETE CASCADE
---);
+CREATE TABLE modelo(
+	id_modelo INT AUTO_INCREMENT,
+	nome VARCHAR(30) NOT NULL,
+	PRIMARY KEY (id_modelo)
+);
+
+CREATE TABLE fabricante(
+	id_fabricante INT AUTO_INCREMENT,
+	nome VARCHAR(30) NOT NULL,
+	PRIMARY KEY (id_fabricante)
+);
 
 CREATE TABLE veiculo(
 	placa VARCHAR(7),
-	cor VARCHAR(25) NOT NULL,
- 	modelo VARCHAR(30) NOT NULL,
-	fabricante VARCHAR(15) NOT NULL,
+	cor VARCHAR(25),
 	avarias VARCHAR(400),
-	PRIMARY KEY (placa)
+	id_modelo INT,
+	id_fabricante INT,
+	PRIMARY KEY (placa),
+	FOREIGN KEY (id_modelo) REFERENCES modelo (id_modelo),
+	FOREIGN KEY (id_fabricante) REFERENCES fabricante (id_fabricante)
 );
 
 CREATE TABLE pesado(
 	placa VARCHAR(7),
-	cargas VARCHAR(20) NOT NULL,
+	carga VARCHAR(20),
 	PRIMARY KEY (placa),
 	FOREIGN KEY (placa) REFERENCES veiculo (placa)
 	ON DELETE CASCADE
@@ -69,15 +75,19 @@ CREATE TABLE particular(
 	ON DELETE CASCADE
 );
 
-CREATE TABLE ordem_servico(
-	id_ordem INT AUTO_INCREMENT,
+CREATE TABLE nota_fiscal(
+	id_nota INT AUTO_INCREMENT,
 	data_inicio TIMESTAMP NOT NULL,
 	data_fim TIMESTAMP NULL,
 	matricula INT NOT NULL,
 	placa VARCHAR(7) NOT NULL,
-	PRIMARY KEY (id_ordem),
+	registro_pessoal VARCHAR(11) NOT NULL,
+	agendado BOOLEAN,
+	forma_pagamento VARCHAR(1) NOT NULL,
+	PRIMARY KEY (id_nota),
 	FOREIGN KEY (matricula) REFERENCES funcionario (matricula),
-	FOREIGN KEY (placa) REFERENCES veiculo (placa)
+	FOREIGN KEY (placa) REFERENCES veiculo (placa),
+	FOREIGN KEY (registro_pessoal) REFERENCES cliente (registro_pessoal)
 );
 
 CREATE TABLE cliente_veiculo(
@@ -89,21 +99,12 @@ CREATE TABLE cliente_veiculo(
 	ON DELETE CASCADE
 );
 
-
-CREATE TABLE cliente_solic_servico(
-	registro_pessoal VARCHAR(11),
-	id_servico INT AUTO_INCREMENT,
-	PRIMARY KEY (registro_pessoal, id_servico),
-	FOREIGN KEY (id_servico) REFERENCES servico (id_servico),
-	FOREIGN KEY (registro_pessoal) REFERENCES cliente (registro_pessoal)
-);
-
-CREATE TABLE servico_na_ordem(
-	id_ordem INT,
+CREATE TABLE servico_na_nota(
+	id_nota INT,
 	id_servico INT,
-	PRIMARY KEY (id_ordem, id_servico),
+	PRIMARY KEY (id_nota, id_servico),
 	FOREIGN KEY (id_servico) REFERENCES servico (id_servico),
-	FOREIGN KEY (id_ordem) REFERENCES ordem_servico (id_ordem)
+	FOREIGN KEY (id_nota) REFERENCES nota_fiscal (id_nota)
 );
 	
 

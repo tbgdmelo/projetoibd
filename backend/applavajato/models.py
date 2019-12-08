@@ -30,13 +30,6 @@ class Cliente(models.Model):
       #  managed = False
        db_table = 'cliente'
  
-class ClienteSolicServico(models.Model):
-   registro_pessoal = models.ForeignKey(Cliente, on_delete=models.CASCADE, db_column='registro_pessoal', primary_key=True)
-   id_servico = models.ForeignKey('Servico', on_delete=models.CASCADE, db_column='id_servico')
-   class Meta:
-      #  managed = False
-       db_table = 'cliente_solic_servico'
-       unique_together = (('registro_pessoal', 'id_servico'),)
  
 class ClienteVeiculo(models.Model):
    registro_pessoal = models.ForeignKey(Cliente, on_delete=models.CASCADE, db_column='registro_pessoal', primary_key=True)
@@ -66,15 +59,19 @@ class Funcionario(models.Model):
       #  managed = False
        db_table = 'funcionario'
  
-class OrdemServico(models.Model):
-   id_ordem = models.AutoField(primary_key=True)
+class NotaFiscal(models.Model):
+   id_nota = models.AutoField(primary_key=True)
    data_inicio = models.DateTimeField()
    data_fim = models.DateTimeField(blank=True, null=True)
    matricula = models.ForeignKey(Funcionario, on_delete=models.CASCADE, db_column='matricula')
    placa = models.ForeignKey('Veiculo', on_delete=models.CASCADE, db_column='placa')
+   forma_pagamento = models.CharField(max_length=1)
+   registro_pessoal = models.ForeignKey('Cliente', on_delete=models.DO_NOTHING, db_column='registro_pessoal')
+   agendado = models.BooleanField();
+
    class Meta:
       #  managed = False
-       db_table = 'ordem_servico'
+       db_table = 'nota_fiscal'
  
 class Particular(models.Model):
    placa = models.ForeignKey('Veiculo', on_delete=models.CASCADE, db_column='placa', primary_key=True)
@@ -98,37 +95,34 @@ class Servico(models.Model):
       #  managed = False
        db_table = 'servico'
  
-class ServicoNaOrdem(models.Model):
-   id_ordem = models.ForeignKey(OrdemServico, on_delete=models.DO_NOTHING, db_column='id_ordem', primary_key=True)
+class ServicoNaNota(models.Model):
+   id_nota = models.ForeignKey(NotaFiscal, on_delete=models.DO_NOTHING, db_column='id_nota', primary_key=True)
    id_servico = models.ForeignKey(Servico, on_delete=models.DO_NOTHING, db_column='id_servico')
    class Meta:
       #  managed = False
-       db_table = 'servico_na_ordem'
-       unique_together = (('id_ordem', 'id_servico'),)
+       db_table = 'servico_na_nota'
+       unique_together = (('id_nota', 'id_servico'),)
 
-"""
-class TelefoneCli(models.Model):
-   registro_pessoal = models.ForeignKey(Cliente, on_delete=models.CASCADE, db_column='registro_pessoal', primary_key=True)
-   telefone = models.CharField(max_length=14)
+class Modelo(models.Model):
+   id_modelo = models.AutoField(primary_key=True)
+   nome = models.CharField(max_length=30)
+   
    class Meta:
-      #  managed = False
-       db_table = 'telefone_cli'
-       unique_together = (('registro_pessoal', 'telefone'),)
+      db_table = 'modelo'
 
-class TelefoneFunc(models.Model):
-   matricula = models.ForeignKey(Funcionario, on_delete=models.CASCADE, db_column='matricula', primary_key=True)
-   telefone = models.CharField(max_length=14)
+class Fabricante(models.Model):
+   id_fabricante = models.AutoField(primary_key=True)
+   nome = models.CharField(max_length=30)
+
    class Meta:
-      #  managed = False
-       db_table = 'telefone_func'
-       unique_together = (('matricula', 'telefone'),)
- """
+      db_table = 'fabricante'
+
 class Veiculo(models.Model):
    placa = models.CharField(primary_key=True, max_length=7)
    cor = models.CharField(max_length=25)
-   modelo = models.CharField(max_length=30)
-   fabricante = models.CharField(max_length=15)
    avarias = models.CharField(max_length=400, blank=True, null=True)
-
+   id_modelo = models.ForeignKey('Modelo', on_delete=models.DO_NOTHING, db_column='id_modelo')
+   id_fabricante = models.ForeignKey('Fabricante', on_delete=models.DO_NOTHING, db_column='id_fabricante')
+   
    class Meta:
       db_table = 'veiculo'

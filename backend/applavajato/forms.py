@@ -1,10 +1,7 @@
 from django import forms
 from applavajato.models import *
+from django.forms import ModelChoiceField
 
-niveis= (
-    ('0','Comum'),
-    ('1','Administrador')
-)
 
 class FuncionarioForm(forms.ModelForm):
     class Meta:
@@ -16,7 +13,17 @@ class ServicoForm(forms.ModelForm):
         model = Servico
         fields = "__all__"
 
+class ModeloChoiceField(ModelChoiceField):
+    def label_from_instance(self, Modelo):
+        return "%s" % Modelo.nome
+
+class FabricanteChoiceField(ModelChoiceField):
+    def label_from_instance(self, Fabricante):
+        return "%s" % Fabricante.nome
+
 class VeiculoForm(forms.ModelForm):
+    id_modelo = ModeloChoiceField(label="Modelo", queryset=Modelo.objects.all())
+    id_fabricante = FabricanteChoiceField(label="Fabricante", queryset=Fabricante.objects.all())
     class Meta:
         model = Veiculo
         fields = "__all__"
@@ -24,7 +31,7 @@ class VeiculoForm(forms.ModelForm):
 class EditVeiculoForm(forms.ModelForm):
     class Meta:
         model = Veiculo
-        fields = ['cor', 'modelo', 'fabricante', 'avarias']
+        fields = "__all__"
 
 class ClienteForm(forms.ModelForm):
     class Meta:

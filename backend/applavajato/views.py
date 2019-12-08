@@ -112,8 +112,8 @@ def delete_serv(request, id_servico):
     return redirect('/show_all_serv')
 
 def show_all_veic(request):
-    veiculos = Veiculo.objects.all()
-    return render(request, 'applavajato/show_all_veiculos.html', {'veiculos':veiculos})
+    veiculos = Veiculo.objects.all()    
+    return render(request, 'applavajato/show_all_veiculos.html', {'veiculos':veiculos,'modelos':modelos,'fabricantes':fabricantes})
 
 def show_veic(request, placa):
     veiculo = get_object_or_404(Veiculo, placa=placa)
@@ -141,15 +141,18 @@ def delete_veic(request, placa):
 def cadastro_cli(request):
     if request.method == "POST":
         form = ClienteForm(request.POST)
-        if form.is_valid():
+        form2 = VeiculoForm(request.POST)
+        if form.is_valid() and form2.is_valid():
             try:
                 form.save()
+                form2.save()
                 return redirect('/show_all_cli')
             except:
                 pass
     else:
         form = ClienteForm()
-    return render(request, 'applavajato/add_cliente.html', {'form':form})
+        form2 = VeiculoForm()
+    return render(request, 'applavajato/add_cliente.html', {'form':form, 'form2':form2})
 
 def show_all_cli(request):
     clientes = Cliente.objects.all()
