@@ -40,7 +40,8 @@ urlpatterns = [
 
     #URLS PARA NOTAS
     path('cadastro_nota', views.cadastro_nota, name='cadastro_nota'),
-    path('show_all_nota', views.show_all_notas, name='mostrar_notas'),
+    path('show_all_notas', views.show_all_notas, name='mostrar_notas'),
+    path('edit_nota/<str:id_nota>', views.edit_nota, name='editar_nota'),
     path('show_nota/<int:id_nota>', views.show_nota, name='mostrar_uma_nota'),
     path('delete_nota/<int:id_nota>', views.delete_nota, name='deletar_nota'),
 ]

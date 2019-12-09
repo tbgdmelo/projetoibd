@@ -207,6 +207,10 @@ def show_all_notas(request):
     notas = NotaFiscal.objects.all()
     return render(request, 'applavajato/show_all_notas.html', {'notas':notas})
 
+def edit_nota(request, id_nota):
+    nota = get_object_or_404(NotaFiscal, id_nota=id_nota)
+    return render(request, 'applavajato/edit_nota.html', {'nota': nota})
+
 def show_nota(request, id_nota):
     nota = get_object_or_404(NotaFiscal, id_nota=id_nota)
     return render(request, 'applavajato/show_nota.html', {'nota': nota})

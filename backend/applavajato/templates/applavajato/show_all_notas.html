@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Notas Cadastrados</title>
+</head>
+<center><h1>Notas Cadastrados</h1></center>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Nº da Nota</th>
+                <th>Data de entrada</th>
+                <th>Data de finalização</th>
+                <th>Forma de Pagamento</th>
+                <th>Solicitante</th>
+                <th>Veiculo</th>
+                <th>Funcionario</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for nota in notas %}
+            <tr>
+                <td>{{ nota.id_nota }}</td>
+                <td>{{ nota.data_inicio }}</td>
+                <td>{{ nota.data_fim }}</td>
+                <td>{{ nota.forma_pagamento }}</td>
+                <td>{{ nota.cliente_id }}</td>
+                <td>{{ nota.veiculo_id }}</td>
+                <td>{{ nota.funcionario }}</td>
+                <td>{{ servicos.servico_id }}</td>
+                <td>
+                    <a href="/show_nota/{{ nota.id_nota }}">Visualizar</a>
+                    <a href="/edit_nota/{{ nota.id_nota }}">Editar</a>
+                    <a href="/delete_nota/{{ nota.id_nota }}">Deletar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <center><a href='/cadastro_nota'>Cadastrar Nova Nota</a></center>
+</body>
+</html>
