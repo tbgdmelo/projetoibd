@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
  
 from django.db import models
+from datetime import datetime
  
 # Create your models here.
  
@@ -58,16 +59,32 @@ class Funcionario(models.Model):
    class Meta:
       #  managed = False
        db_table = 'funcionario'
- 
+
+class Veiculo(models.Model):
+   placa = models.CharField(primary_key=True, max_length=7)
+   cor = models.CharField(max_length=25)
+   avarias = models.CharField(max_length=400, blank=True, null=True)
+   id_modelo = models.ForeignKey('Modelo', on_delete=models.DO_NOTHING, db_column='id_modelo')
+   id_fabricante = models.ForeignKey('Fabricante', on_delete=models.DO_NOTHING, db_column='id_fabricante')
+   
+   class Meta:
+      db_table = 'veiculo'
+
 class NotaFiscal(models.Model):
+   PAGAMENTO_CHOICES = [
+      ["0", "Dinheiro"],
+      ["1", "Crédito"],
+      ["2", "Débito"]
+   ]
    id_nota = models.AutoField(primary_key=True)
    data_inicio = models.DateTimeField()
    data_fim = models.DateTimeField(blank=True, null=True)
    matricula = models.ForeignKey(Funcionario, on_delete=models.CASCADE, db_column='matricula')
-   placa = models.ForeignKey('Veiculo', on_delete=models.CASCADE, db_column='placa')
-   forma_pagamento = models.CharField(max_length=1)
+   placa = models.ForeignKey(Veiculo, on_delete=models.CASCADE, db_column='placa')
+   forma_pagamento = models.CharField(max_length=1, choices=PAGAMENTO_CHOICES)
    registro_pessoal = models.ForeignKey('Cliente', on_delete=models.DO_NOTHING, db_column='registro_pessoal')
-   agendado = models.BooleanField();
+   agendado = models.BooleanField()
+   #servicos = models.ManyToManyField('Servico')
 
    class Meta:
       #  managed = False
@@ -117,12 +134,4 @@ class Fabricante(models.Model):
    class Meta:
       db_table = 'fabricante'
 
-class Veiculo(models.Model):
-   placa = models.CharField(primary_key=True, max_length=7)
-   cor = models.CharField(max_length=25)
-   avarias = models.CharField(max_length=400, blank=True, null=True)
-   id_modelo = models.ForeignKey('Modelo', on_delete=models.DO_NOTHING, db_column='id_modelo')
-   id_fabricante = models.ForeignKey('Fabricante', on_delete=models.DO_NOTHING, db_column='id_fabricante')
-   
-   class Meta:
-      db_table = 'veiculo'
+

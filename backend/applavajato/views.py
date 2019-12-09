@@ -8,42 +8,11 @@ from applavajato.forms import *
 from applavajato.models import *
 
 # Create your views here.
-
+#VIEWS DO LOGIN
 def login(request):
     return render(request, 'applavajato/login.html', {})
 
-def cadastro_veic(request):
-    if request.method == "POST":
-        form = VeiculoForm(request.POST)
-        if form.is_valid():
-            try:
-                form.save()
-                return redirect('/show_all_veic')
-            except:
-                pass
-    else:
-        form = VeiculoForm()
-    return render(request, 'applavajato/add_veiculo.html', {'form':form})
-
-def select_report(request):
-    return render(request, 'applavajato/select_relatorio.html', {})
-
-def cadastro_serv(request):
-    if request.method == "POST":
-        form = ServicoForm(request.POST)
-        if form.is_valid():
-            try:
-                form.save()
-                return redirect('/show_all_serv')
-            except:
-                Exception("Form not valid!")
-    else:
-        form = ServicoForm()
-    return render(request, 'applavajato/add_servico.html', {'form':form})
-
-def cadastro_nota(request):
-    return render(request, 'applavajato/add_nota.html', {})
-
+#VIEWS DE FUNCIONARIOS
 def cadastro_func(request):
     if request.method == "POST":
         form = FuncionarioForm(request.POST)
@@ -84,6 +53,20 @@ def delete_func(request, matricula):
     funcionario.delete()
     return redirect('/show_all_func')
 
+#VIEWS DE SERVICOS
+def cadastro_serv(request):
+    if request.method == "POST":
+        form = ServicoForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('/show_all_serv')
+            except:
+                Exception("Form not valid!")
+    else:
+        form = ServicoForm()
+    return render(request, 'applavajato/add_servico.html', {'form':form})
+
 def show_all_serv(request):
     servicos = Servico.objects.all()
     return render(request, 'applavajato/show_all_servicos.html', {'servicos':servicos})
@@ -110,6 +93,24 @@ def delete_serv(request, id_servico):
     servico = get_object_or_404(Servico, id_servico=id_servico)
     servico.delete()
     return redirect('/show_all_serv')
+
+
+#VIEWS DE VEICULOS
+def cadastro_veic(request):
+    if request.method == "POST":
+        form = VeiculoForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('/show_all_veic')
+            except:
+                pass
+    else:
+        form = VeiculoForm()
+    return render(request, 'applavajato/add_veiculo.html', {'form':form})
+
+def select_report(request):
+    return render(request, 'applavajato/select_relatorio.html', {})
 
 def show_all_veic(request):
     veiculos = Veiculo.objects.all()    
@@ -138,6 +139,8 @@ def delete_veic(request, placa):
     veiculo.delete()
     return redirect('/show_all_veic')
 
+
+#VIEWS DE CLIENTE
 def cadastro_cli(request):
     if request.method == "POST":
         form = ClienteForm(request.POST)
@@ -180,3 +183,30 @@ def delete_cli(request, registro_pessoal):
     cliente = get_object_or_404(Cliente, registro_pessoal=registro_pessoal)
     cliente.delete()
     return redirect('/show_all_cli')
+
+#VIEWS DE NOTA
+def cadastro_nota(request):
+    if request.method == "POST":
+        form = NotaFiscalForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('/show_all_notas')
+            except:
+                pass
+    else:
+        form = NotaFiscalForm()
+    return render(request, 'applavajato/add_nota.html', {'form':form})
+
+def show_all_notas(request):
+    notas = NotaFiscal.objects.all()
+    return render(request, 'applavajato/show_all_notas.html', {'notas':notas})
+
+def show_nota(request, id_nota):
+    nota = get_object_or_404(NotaFiscal, id_nota=id_nota)
+    return render(request, 'applavajato/show_nota.html', {'nota': nota})
+
+def delete_nota(request, id_nota):
+    nota = get_object_or_404(NotaFiscal, id_nota=id_nota)
+    nota.delete()
+    return redirect('/show_all_notas')
