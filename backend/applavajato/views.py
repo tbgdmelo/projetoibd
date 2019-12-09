@@ -146,12 +146,17 @@ def cadastro_cli(request):
         form = ClienteForm(request.POST)
         form2 = VeiculoForm(request.POST)
         if form.is_valid() and form2.is_valid():
-            try:
-                form.save()
-                form2.save()
-                return redirect('/show_all_cli')
-            except:
-                pass
+            #Guarda o objeto do cliente novo
+            new_cliente = form.save()
+            #Objeto carro é criado sem ser salvo
+            new_veiculo = form2.save(commit=False)
+            #A chave estrangeira cliente do veiculo vai apontar para o cliente
+            new_veiculo.cliente = new_client
+            #Finalmente salva o novo veiculo no BD
+            new_veiculo.save()
+            return redirect('/show_all_cli')
+        else:
+            return render(request, 'applavajato/add_cliente.html', {'form':form, 'form2':form2})
     else:
         form = ClienteForm()
         form2 = VeiculoForm()
