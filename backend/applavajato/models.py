@@ -50,8 +50,8 @@ class Veiculo(models.Model):
    placa = models.CharField(primary_key=True, max_length=7)
    cor = models.CharField(max_length=25)
    avarias = models.CharField(max_length=400, blank=True, null=True)
-   modelo = models.OneToOneField(Modelo, on_delete=models.DO_NOTHING,null=False)
-   fabricante = models.OneToOneField(Fabricante,on_delete=models.DO_NOTHING, null=False)
+   modelo = models.ForeignKey(Modelo, on_delete=models.DO_NOTHING,null=False,  related_name='modelos')
+   fabricante = models.ForeignKey(Fabricante,on_delete=models.DO_NOTHING, null=False,  related_name='fabricantes')
    tipo_veiculo = models.CharField(max_length=1, choices=TIPOS_CHOICES)
    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name='veiculos')
    

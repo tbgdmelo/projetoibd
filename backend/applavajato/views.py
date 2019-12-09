@@ -151,7 +151,7 @@ def cadastro_cli(request):
             #Objeto carro é criado sem ser salvo
             new_veiculo = form2.save(commit=False)
             #A chave estrangeira cliente do veiculo vai apontar para o cliente
-            new_veiculo.cliente = new_client
+            new_veiculo.cliente = new_cliente
             #Finalmente salva o novo veiculo no BD
             new_veiculo.save()
             return redirect('/show_all_cli')
