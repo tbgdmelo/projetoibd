@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Notas Cadastrados</title>
 </head>
+<a style="float: left;" href="/homepage">Página Inicial</a>
 <center><h1>Notas Cadastrados</h1></center>
+<a style="float: right;" href="/deslogar_usuario">Sair do Sistema</a>
 <body>
     <table>
         <thead>
@@ -27,10 +29,9 @@
                 <td>{{ nota.data_inicio }}</td>
                 <td>{{ nota.data_fim }}</td>
                 <td>{{ nota.forma_pagamento }}</td>
-                <td>{{ nota.cliente_id }}</td>
-                <td>{{ nota.veiculo_id }}</td>
+                <td>{{ nota.cliente }}</td>
+                <td>{{ nota.veiculo }}</td>
                 <td>{{ nota.funcionario }}</td>
-                <td>{{ servicos.servico_id }}</td>
                 <td>
                     <a href="/show_nota/{{ nota.id_nota }}">Visualizar</a>
                     <a href="/edit_nota/{{ nota.id_nota }}">Editar</a>
@@ -42,6 +43,6 @@
     </table>
     <br>
     <br>
-    <center><a href='/cadastro_nota'>Cadastrar Nova Nota</a></center>
+    <center><a href='/show_all_cli'>Voltar</a></center>
 </body>
 </html>

@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Funcionários Cadastrados</title>
 </head>
+<a style="float: left;" href="/homepage">Página Inicial</a>
 <center><h1>Funcionários Cadastrados</h1></center>
+<a style="float: right;" href="/deslogar_usuario">Sair do Sistema</a>
 <body>
     <table>
         <thead>
@@ -16,9 +18,6 @@
                 <th>Nome</th>
                 <th>Endereço</th>
                 <th>Função</th>
-                <th>Usuario</th>
-                <th>Senha</th>
-                <th>Nivel de Usuário</th>
             </tr>
         </thead>
         <tbody>
@@ -29,9 +28,6 @@
                 <td>{{ funcionario.nome }}</td>
                 <td>{{ funcionario.endereco }}</td>
                 <td>{{ funcionario.funcao }}</td>
-                <td>{{ funcionario.usuario }}</td>
-                <td>{{ funcionario.senha }}</td>
-                <td>{{ funcionario.nivel }}</td>
                 <td>
                     <a href="/show_func/{{ funcionario.matricula }}">Visualizar</a>
                     <a href="/edit_func/{{ funcionario.matricula }}">Editar</a>

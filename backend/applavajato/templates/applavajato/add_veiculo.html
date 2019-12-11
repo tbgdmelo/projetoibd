@@ -9,7 +9,7 @@
 <center><h1>Cadastro de Veículo</h1></center>
 <h4>Dados do Veículo</h4>
 <body>
-    <form method="POST" action="/cadastro_veic">
+    <form method="POST" action="/cadastro_veic/{{cliente.registro_pessoal}}">
         {% csrf_token %} 
         {{ form.as_p }}
     </br>

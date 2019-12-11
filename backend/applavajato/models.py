@@ -3,7 +3,15 @@ from __future__ import unicode_literals
  
 from django.db import models
 from datetime import datetime
- 
+
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.core import validators
+from django.utils import timezone
+from django.utils.http import urlquote
+from django.utils.translation import ugettext_lazy as _
+import re
+from django.conf import settings
+
 # Create your models here.
  
 # This is an auto-generated Django model module.
@@ -14,6 +22,39 @@ from datetime import datetime
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 
+class UserManager(BaseUserManager):
+    def _create_user(self, username, password, is_staff, is_superuser, **extra_fields):
+        now = timezone.now()
+        if not username:
+            raise ValueError(_("The given username must be set"))
+        #email = self.normalize_email(email)
+        user = self.model(username=username, is_staff=is_staff, is_active=True, is_superuser=is_superuser, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+    def create_user(self, username, password=None, **extra_fields):
+        return self._create_user(username, password, False, False, **extra_fields)
+    def create_superuser(self, username, password, **extra_fields):
+        user=self._create_user(username, password, True, True, **extra_fields)
+        user.is_active=True
+        user.save(using=self._db)
+        return user
+
+#Classe para os logins no sistema
+class User(AbstractBaseUser, PermissionsMixin):
+   username = models.CharField(_('username'), max_length=15, unique=True, help_text=_('Required. 15 characters or fewer. Letters, numbers and @/./+/-/_ characters'), validators=[ validators.RegexValidator(re.compile('^[\w.@+-]+$'), _('Enter a valid username.'), _('invalid'))])
+   #email = models.EmailField(_('email address'), max_length=255, unique=True)
+   is_staff = models.BooleanField(_('staff status'), help_text=_('Designates whether the user can log into this admin site.'))
+   is_active = models.BooleanField(_('active'), help_text=_('Designates whether this user should be treated as active. Unselect this instead of deleting accounts.'))
+   #date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+   #is_trusty = models.BooleanField(_('trusty'), default=False, help_text=_('Designates whether this user has confirmed his account.'))
+   USERNAME_FIELD = 'username'
+   #REQUIRED_FIELDS = ['username','is_active']
+   objects = UserManager()
+   class Meta:
+      verbose_name = _('user')
+      verbose_name_plural = _('users')
+
 #Classe do cliente
 #Cliente é obrigatório ter endereço, e pelo menos um telefone
 #Campo nome não pode ser em branco e/ou nulo
@@ -23,6 +64,7 @@ class Cliente(models.Model):
    endereco = models.CharField(max_length=150, null=False, blank=False)
    telefone1 = models.CharField(max_length=14, null=False, blank=False)
    telefone2 = models.CharField(max_length=14, blank=True)
+   #usuario = models.OneToOneField(User, on_delete=models.CASCADE)
    class Meta:
        db_table = 'cliente'
    def __str__(self):
@@ -67,7 +109,7 @@ class Veiculo(models.Model):
       ["Vermelho", "Vermelho"],
       ["Verde","Verde"],
       ["Azul","Azul"],
-      ["Marrom","Marrom"]
+      ["Marrom","Marrom"],
       ["Laranja", "Laranja"],
       ["Amarelo", "Amarelo"],
       ["Rosa","Rosa"],
@@ -96,6 +138,7 @@ class Funcionario(models.Model):
    funcao = models.CharField(max_length=30, null=False, blank=False)
    telefone1 = models.CharField(max_length=14, null=False, blank=False)
    telefone2 = models.CharField(max_length=14, blank=True)
+   usuario = models.OneToOneField(User, on_delete=models.CASCADE)
    class Meta:
        db_table = 'funcionario'
    def __str__(self):
@@ -132,7 +175,7 @@ class NotaFiscal(models.Model):
    data_inicio = models.DateTimeField()
    data_fim = models.DateTimeField(blank=True, null=True)
    forma_pagamento = models.CharField(max_length=8, choices=PAGAMENTO_CHOICES, null=False, blank=False)
-   valor_final = models.DecimalField(max_digits=6, decimal_places=2, blank=False, null=False)
+   valor_final = models.DecimalField(max_digits=6, decimal_places=2)
    cliente = models.ForeignKey(Cliente, on_delete=models.DO_NOTHING, related_name='nota')
    veiculo = models.ForeignKey(Veiculo, on_delete=models.DO_NOTHING, related_name='veiculo')
    funcionario = models.ForeignKey(Funcionario, on_delete=models.DO_NOTHING, related_name='funcionario')

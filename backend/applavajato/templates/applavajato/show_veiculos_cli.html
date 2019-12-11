@@ -7,8 +7,7 @@
     <title>Veículos Cadastrados</title>
 </head>
 <a style="float: left;" href="/homepage">Página Inicial</a>
-<center><h1>Veículos Cadastrados</h1></center>
-<a style="float: right;" href="/deslogar_usuario">Sair do Sistema</a>
+<center><h1>Veículos Cadastrados do Cliente</h1></center>
 <body>
     <table>
         <thead>
@@ -18,6 +17,7 @@
                 <th>Modelo</th>
                 <th>Fabricante</th>
                 <th>Avarias</th>
+                <th>Tipo</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +28,7 @@
                 <td>{{ veiculo.modelo }}</td>
                 <td>{{ veiculo.fabricante }}</td>
                 <td>{{ veiculo.avarias }}</td>
+                <td>{{ veiculo.tipo_veiculo }}</td>
                 <td>
                     <a href="/show_veic/{{ veiculo.placa }}">Visualizar</a>
                     <a href="/edit_veic/{{ veiculo.placa }}">Editar</a>
@@ -39,5 +40,6 @@
     </table>
     <br>
     <br>
+    <center><a href='/show_all_cli'>Voltar</a></center>
 </body>
 </html>

@@ -12,11 +12,14 @@
     <form method="POST" action="/cadastro_cli">
         {% csrf_token %} 
         {{ form.as_p }}
+        
+        {% csrf_token %} 
+        {{ form_usuario.as_p }}
     <h4>Dados do Veiculo</h4>
         {% csrf_token %} 
         {{ form2.as_p }}
         <button type="submit" >Salvar</button>
+        <a href="/show_all_cli">Cancelar</a>
     </form>
-    <a href="/show_all_cli">Cancelar</a>
 </body>
 </html> 

@@ -2,9 +2,12 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    #INICIO
+    path('homepage', views.homepage, name="pagina_inicial"),
+
     #URL DE LOGIN
-    path('', views.login, name='tela_login'),    
-    path('select_report', views.select_report, name='tipo_relatorio'),
+    path('', views.logar_usuario, name='tela_inicial'),    
+    path('deslogar_usuario', views.deslogar_usuario, name="deslogar_usuario"),
    
     #URLS PARA FUNCIONARIOS
     path('cadastro_func', views.cadastro_func, name='cadastro_funcionario'),
@@ -23,9 +26,10 @@ urlpatterns = [
     path('delete_serv/<int:id_servico>', views.delete_serv, name='deletar_servico'),
 
     #URLS PARA VEICULOS
-    path('cadastro_veic', views.cadastro_veic, name='cadastro_veiculo'),
+    path('cadastro_veic/<str:registro_pessoal>', views.cadastro_veic, name='cadastro_veiculo'),
     path('show_all_veic', views.show_all_veic, name='mostrar_veiculos'),
     path('show_veic/<str:placa>', views.show_veic, name='mostrar_um_veiculo'),
+    path('show_veic_cli/<str:registro_pessoal>', views.show_veic_cli, name='mostrar_veiculos_cliente'),
     path('edit_veic/<str:placa>', views.edit_veic, name='editar_veiculo'),
     path('update_veic/<str:placa>', views.update_veic, name='atualizar_veiculo'),
     path('delete_veic/<str:placa>', views.delete_veic, name='deletar_veiculo'),
@@ -39,7 +43,7 @@ urlpatterns = [
     path('delete_cli/<str:registro_pessoal>', views.delete_cli, name='deletar_cliente'),
 
     #URLS PARA NOTAS
-    path('cadastro_nota', views.cadastro_nota, name='cadastro_nota'),
+    path('cadastro_nota/<str:registro_pessoal>', views.cadastro_nota, name='cadastro_nota'),
     path('show_all_notas', views.show_all_notas, name='mostrar_notas'),
     path('edit_nota/<str:id_nota>', views.edit_nota, name='editar_nota'),
     path('show_nota/<int:id_nota>', views.show_nota, name='mostrar_uma_nota'),

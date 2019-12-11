@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Clientes Cadastrados</title>
 </head>
+<a style="float: left;" href="/homepage">Página Inicial</a>
 <center><h1>Clientes Cadastrados</h1></center>
+<a style="float: right;" href="/deslogar_usuario">Sair do Sistema</a>
 <body>
     <table>
         <thead>
@@ -27,9 +29,12 @@
                 <td>{{ cliente.telefone1 }}</td>
                 <td>{{ cliente.telefone2 }}</td>
                 <td>
-                    <a href="/show_cli/{{ cliente.registro_pessoal }}">Visualizar</a>
-                    <a href="/edit_cli/{{ cliente.registro_pessoal }}">Editar</a>
-                    <a href="/delete_cli/{{ cliente.registro_pessoal }}">Deletar</a>
+                    <a href="/cadastro_veic/{{ cliente.registro_pessoal }}">Add Veículo</a>
+                    <a href="/show_veic_cli/{{ cliente.registro_pessoal }}">Visualizar Veículos</a>
+                    <a href="/cadastro_nota/{{ cliente.registro_pessoal }}">Solicitar/Agendar Serviços</a>
+                    <a href="/show_cli/{{ cliente.registro_pessoal }}">View Cadastro</a>
+                    <a href="/edit_cli/{{ cliente.registro_pessoal }}">Edit. Cadastro</a>
+                    <a href="/delete_cli/{{ cliente.registro_pessoal }}">Del. Cadastro</a>
                 </td>
             </tr>
             {% endfor %}
