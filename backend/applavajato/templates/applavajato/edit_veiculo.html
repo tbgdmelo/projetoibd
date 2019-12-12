@@ -9,7 +9,7 @@
 <center><h1>Atualizar dados do Veiculo</h1></center>
 <h4>Dados do Veiculo</h4>
 <body>
-    <form method="POST" action="{% url 'atualizar_veiculo' placa=veiculo.placa%}">
+    <form method="POST" action="/update_veic/{{veiculo.placa}}">
         {% csrf_token %}  
     <!-- area de campos do form -->
     <hr/>
@@ -17,27 +17,72 @@
         <div>
         </br>
         <label for="id_placa">Placa:</label>
-        <input disabled="true" type="text" name="placa" id="id_placa"  value="{{ veiculo.placa }}"/>  
+        <input type="text" name="placa" id="id_placa"  value="{{ veiculo.placa }}"/>  
     </div>
     <div>
         </br>
-        <label for="id_cor">Cor:</label>
-        <input type="text" name="cor" id="id_cor"  value="{{ veiculo.cor }}"/> 
+        <label for="id_cor">Cor:</label> <select name="cor" id="id_cor">
+            <option value="{{veiculo.cor}}" selected>{{veiculo.cor}}</option>
+                  
+            <option value="Preto">Preto</option>
+                  
+            <option value="Branco">Branco</option>
+                  
+            <option value="Cinza">Cinza</option>
+                  
+            <option value="Prata">Prata</option>
+                  
+            <option value="Vermelho">Vermelho</option>
+                  
+            <option value="Verde">Verde</option>
+                  
+            <option value="Azul">Azul</option>
+                  
+            <option value="Marrom">Marrom</option>
+                  
+            <option value="Laranja">Laranja</option>
+                  
+            <option value="Amarelo">Amarelo</option>
+                  
+            <option value="Rosa">Rosa</option>
+                  
+        </select>
     </div>
     <div>
         </br>
         <label for="id_modelo">Modelo:</label>
-        <input type="text" name="modelo" id="id_modelo"  value="{{ veiculo.modelo }}"/>   
+        {%for modelo in modelos %}
+        <select name="modelo" required id="id_modelo">
+            <option value="{{modelo.id_modelo}}" selected>{{modelo}}</option>
+        </select>
+        {% endfor %}
     </div>
     <div>
         </br>
         <label for="id_fabricante">Fabricante:</label>
-        <input type="text" name="fabricante" id="id_fabricante"  value="{{ veiculo.fabricante }}"/>  
+        {%for fabricante in fabricantes %}
+        <select name="fabricante" required id="id_fabricante">
+            <option value="{{fabricante.id_fabricante}}" selected>{{fabricante}}</option>
+        </select>
+        {% endfor %}  
     </div>
     <div>
         </br>
         <label for="id_avarias">Avarias:</label>
         <input type="text" name="avarias" id="id_avarias"  value="{{ veiculo.avarias }}"/> 
+    </div>
+    <div>
+        </br>
+        <label for="id_tipo_veiculo">Tipo veiculo:</label> <select name="tipo_veiculo" required id="id_tipo_veiculo">
+            <option value="{{veiculo.tipo_veiculo}}" selected>{{veiculo.tipo_veiculo}}</option>
+                  
+            <option value="Aluguel">Aluguel</option>
+                  
+            <option value="Pesado">Pesado</option>
+                  
+            <option value="Particular">Particular</option>
+                  
+        </select>
     </div>
     <div>
         </br>

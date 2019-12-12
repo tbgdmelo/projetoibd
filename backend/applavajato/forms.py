@@ -89,11 +89,6 @@ class VeiculoForm(forms.ModelForm):
         fields = "__all__"
         exclude = ("cliente",)
 
-class EditVeiculoForm(forms.ModelForm):
-    class Meta:
-        model = Veiculo
-        fields = "__all__"
-
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente

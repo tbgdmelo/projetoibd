@@ -17,8 +17,6 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-
-
 # Create your views here.
 
 #INICIO
@@ -182,14 +180,16 @@ def show_veic(request, placa):
 @login_required(login_url='/')
 def edit_veic(request, placa):
     veiculo = get_object_or_404(Veiculo, placa=placa)
-    return render(request, 'applavajato/edit_veiculo.html', {'veiculo': veiculo})
+    modelos = Modelo.objects.all()
+    fabricantes = Fabricante.objects.all()
+    return render(request, 'applavajato/edit_veiculo.html', {'veiculo': veiculo,'modelos':modelos,'fabricantes':fabricantes})
 
 @login_required(login_url='/')
 def update_veic(request, placa):
     veiculo = get_object_or_404(Veiculo, placa=placa)
     if request.method == "POST":
-        form = EditVeiculoForm (request.POST, instance=veiculo)
-        if form.is_valid():
+        form = VeiculoForm (request.POST, instance=veiculo)
+        if form.is_valid(): 
             veiculo = form.save(commit=False)
             veiculo.save()
             return redirect('/show_all_veic')
