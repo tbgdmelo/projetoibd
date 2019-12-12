@@ -20,6 +20,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 #INICIO
+@login_required(login_url='/')
 def homepage(request):
     return render(request, 'applavajato/homepage.html')
 
