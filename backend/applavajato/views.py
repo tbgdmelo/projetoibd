@@ -16,6 +16,7 @@ User = get_user_model()
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db import connection
 
 # Create your views here.
 
@@ -302,3 +303,52 @@ def delete_nota(request, id_nota):
     nota = get_object_or_404(NotaFiscal, id_nota=id_nota)
     nota.delete()
     return redirect('/show_all_notas')
+
+#VIEWS DOS RELATORIOS POR TIPOS DE VEICULOS
+def query_relatorio3_pesado():
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT nome,count(nome) from nota_fiscal inner join nota_fiscal_servicos on id_nota = notafiscal_id inner join veiculo on veiculo_id = placa inner join servico on servico_id = id_servico where tipo_veiculo='Pesado' group by nome;")
+        rows = cursor.fetchall()
+        return rows
+
+@login_required(login_url='/')
+def relatorio_veiculo_pesado(request):
+    result = query_relatorio3_pesado()
+    dados =[]
+    dados = list(result)
+    #print(dados)
+    dados = dict(dados)
+    #print(dados)
+    return render(request, 'applavajato/relatorio_veiculo_pesado.html', {'dados':dados})
+
+def query_relatorio3_aluguel():
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT nome,count(nome) from nota_fiscal inner join nota_fiscal_servicos on id_nota = notafiscal_id inner join veiculo on veiculo_id = placa inner join servico on servico_id = id_servico where tipo_veiculo='Aluguel' group by nome;")
+        rows = cursor.fetchall()
+        return rows
+
+@login_required(login_url='/')
+def relatorio_veiculo_aluguel(request):
+    result = query_relatorio3_aluguel()
+    dados =[]
+    dados = list(result)
+    #print(dados)
+    dados = dict(dados)
+    #print(dados)
+    return render(request, 'applavajato/relatorio_veiculo_aluguel.html', {'dados':dados})
+
+def query_relatorio3_particular():
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT nome,count(nome) from nota_fiscal inner join nota_fiscal_servicos on id_nota = notafiscal_id inner join veiculo on veiculo_id = placa inner join servico on servico_id = id_servico where tipo_veiculo='Particular' group by nome;")
+        rows = cursor.fetchall()
+        return rows
+
+@login_required(login_url='/')
+def relatorio_veiculo_particular(request):
+    result = query_relatorio3_particular()
+    dados =[]
+    dados = list(result)
+    #print(dados)
+    dados = dict(dados)
+    #print(dados)
+    return render(request, 'applavajato/relatorio_veiculo_particular.html', {'dados':dados})

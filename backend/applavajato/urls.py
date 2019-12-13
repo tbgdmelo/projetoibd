@@ -48,4 +48,13 @@ urlpatterns = [
     path('edit_nota/<str:id_nota>', views.edit_nota, name='editar_nota'),
     path('show_nota/<int:id_nota>', views.show_nota, name='mostrar_uma_nota'),
     path('delete_nota/<int:id_nota>', views.delete_nota, name='deletar_nota'),
+
+    #URLS PARA RELATORIO 1
+
+    #URLS PARA RELATORIO 2
+
+    #URLS PARA RELATORIO 3
+    path('relatorio_veiculo_pesado', views.relatorio_veiculo_pesado, name='relatorio_pesados'),
+    path('relatorio_veiculo_particular', views.relatorio_veiculo_particular, name='relatorio_particular'),
+    path('relatorio_veiculo_aluguel', views.relatorio_veiculo_aluguel, name='relatorio_aluguel'),
 ]

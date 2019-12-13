@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Relatório de Veículo</title>
+</head>
+<body>
+    <a style="float: left;" href="/homepage">Página Inicial</a>
+    <center><h1>Relatório de Veiculos Particular</h1></center>
+    <table>
+        <thead>
+            <tr>
+                <th>Serviço</th>
+                <th>Quantidade de Serviços</th>
+            </tr>
+        </thead>
+    <tbody>
+        {% for k,v in dados.items %}
+            <tr>
+                <td style="text-align: center;">{{k}}</td>
+                <td style="text-align: center;">{{v}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</body>
+</html>
