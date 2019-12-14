@@ -17,7 +17,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import connection
-
+from collections import namedtuple
 # Create your views here.
 
 #INICIO
@@ -352,3 +352,78 @@ def relatorio_veiculo_particular(request):
     dados = dict(dados)
     #print(dados)
     return render(request, 'applavajato/relatorio_veiculo_particular.html', {'dados':dados})
+
+#FUNCAO QUE DEFINE O MES SELECIONADO
+def define_mes(mes):
+    result = []
+    if(mes == "1"):
+        result.append("2019-01-01")
+        result.append("2019-01-31")
+    elif(mes == "2"):
+        result.append("2019-02-01")
+        result.append("2019-02-29")
+    elif(mes == "3"):
+        result.append("2019-03-01")
+        result.append("2019-03-31")
+    elif(mes == "4"):
+        result.append("2019-04-01")
+        result.append("2019-04-30")
+    elif(mes == "5"):
+        result.append("2019-05-01")
+        result.append("2019-06-31")
+    elif(mes == "6"):
+        result.append("2019-06-01")
+        result.append("2019-06-30")
+    elif(mes == "7"):
+        result.append("2019-07-01")
+        result.append("2019-07-31")
+    elif(mes == "8"):
+        result.append("2019-08-01")
+        result.append("2019-08-31")
+    elif(mes == "9"):
+        result.append("2019-09-01")
+        result.append("2019-09-30")
+    elif(mes == "10"):
+        result.append("2019-10-01")
+        result.append("2019-10-31")
+    elif(mes == "11"):
+        result.append("2019-11-01")
+        result.append("2019-11-30")
+    elif(mes == "12"):
+        result.append("2019-12-01")
+        result.append("2019-12-31")
+
+    return result
+
+def namedtuplefetchall(cursor):
+    #Return all rows from a cursor as a namedtuple
+    desc = cursor.description
+    nt_result = namedtuple('Result', [col[0] for col in desc])
+    return [nt_result(*row) for row in cursor.fetchall()]
+
+#QUERY QUE BUSCA O RESULTADO DO MES
+def query_relatorio1(mes):
+    intervalo = []
+    intervalo = define_mes(mes)
+    with connection.cursor() as cursor:
+        cursor.execute("select servico.nome, sum(valor)as faturamento, count(distinct(funcionario.nome))as trabalhadores from nota_fiscal_servicos inner join nota_fiscal on notafiscal_id = id_nota inner join servico on servico_id=id_servico inner join funcionario on matricula = funcionario_id  where data_inicio between %s and %s group by servico.nome;", (intervalo[0], intervalo[1]))
+        rows = namedtuplefetchall(cursor)
+        #print(rows)
+        return rows
+
+#VIEW DO RELATORIO 1
+@login_required(login_url='/')
+def relatorio_servico(request):
+    form = RelatorioForm()
+    return render(request, 'applavajato/relatorio_servico.html',{'form':form})
+
+@login_required(login_url='/')
+def relatorio_servico_mes(request):
+    form = RelatorioForm()
+    if request.method == "POST":
+        mes = request.POST.get("mes", None)
+        dados = query_relatorio1(mes)
+        
+        return render(request, 'applavajato/relatorio_servico.html',{'form':form,'dados':dados})
+    else:
+        return render(request, 'applavajato/relatorio_servico.html',{'form':form})

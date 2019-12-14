@@ -57,4 +57,8 @@ urlpatterns = [
     path('relatorio_veiculo_pesado', views.relatorio_veiculo_pesado, name='relatorio_pesados'),
     path('relatorio_veiculo_particular', views.relatorio_veiculo_particular, name='relatorio_particular'),
     path('relatorio_veiculo_aluguel', views.relatorio_veiculo_aluguel, name='relatorio_aluguel'),
+
+    #URLS PARA RELATORIO 3
+    path('relatorio_servico', views.relatorio_servico, name='relatorio_servico'),
+    path('relatorio_servico_mes', views.relatorio_servico_mes, name='relatorio_servico_mes'),
 ]
