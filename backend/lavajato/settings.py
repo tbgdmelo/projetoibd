@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'lavajato.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lavajato-db',
+        'NAME': 'lavateste1',
         'USER': 'root',
-        'PASSWORD': 'lavajato',
-        'HOST': 'db-lavajato',
+        'PASSWORD': 'TBGdemelo#',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
@@ -123,3 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#Modelo novo de usuarios/login
+AUTH_USER_MODEL = 'applavajato.User'
+LOGIN_URL = '/'
