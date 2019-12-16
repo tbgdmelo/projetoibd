@@ -68,11 +68,11 @@
         <!-- <input disabled="true" type=text name="servico_id" id="id_servico" value={{nota.servico_id}}>  -->
         {%for i,j in dados1.items%}
             <tr>
-                <td style="text-align: center;">{{j}}</td>
+                <td id="total_id" style="text-align: center;">{{j}}</td>
             </tr>
         {% endfor %}
-        </div>
-    </br>
+    </div>
+    <br>
     <div>
         <a href='/../show_all_notas'>Lista de Notas</a>
     </div>

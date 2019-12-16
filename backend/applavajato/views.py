@@ -280,7 +280,7 @@ def cadastro_nota(request, registro_pessoal):
             new_nota.cliente = cliente
             new_nota.save()
             form.save_m2m()
-            return redirect('/show_all_cli')
+            return show_nota(request, new_nota.id_nota)
     else:
         form = NotaFiscalForm() 
     return render(request, 'applavajato/add_nota.html', {'form':form, 'cliente':cliente})
@@ -442,14 +442,14 @@ def relatorio_servico_mes(request):
         
 def query_transacao_valor_total(id):
     with connection.cursor() as cursor:
-        cursor.execute("Select notafiscal_id, sum(valor) as valor_total from servico inner join nota_fiscal_servicos on id_servico = servico_id inner join nota_fiscal on id_nota = notafiscal_id where notafiscal_id = %s;", str(id))
+        cursor.execute("Select notafiscal_id, sum(valor) as valor_total from servico inner join nota_fiscal_servicos on id_servico = servico_id inner join nota_fiscal on id_nota = notafiscal_id where notafiscal_id = %s;", [str(id)])
         rows = cursor.fetchall()
         print(rows)
         return rows
 
 def query_transacao_servicos(id):
     with connection.cursor() as cursor:
-        cursor.execute("Select nome, valor from servico inner join nota_fiscal_servicos on id_servico = servico_id inner join nota_fiscal on id_nota = notafiscal_id where notafiscal_id = %s;", (str(id)))
+        cursor.execute("Select nome, valor from servico inner join nota_fiscal_servicos on id_servico = servico_id inner join nota_fiscal on id_nota = notafiscal_id where notafiscal_id = %s;", [str(id)])
         rows = namedtuplefetchall(cursor)
         print(rows)
         return rows
