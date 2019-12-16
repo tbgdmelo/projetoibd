@@ -175,7 +175,6 @@ class NotaFiscal(models.Model):
    data_inicio = models.DateTimeField()
    data_fim = models.DateTimeField(blank=True, null=True)
    forma_pagamento = models.CharField(max_length=8, choices=PAGAMENTO_CHOICES, null=False, blank=False)
-   valor_final = models.DecimalField(max_digits=6, decimal_places=2)
    cliente = models.ForeignKey(Cliente, on_delete=models.DO_NOTHING, related_name='nota')
    veiculo = models.ForeignKey(Veiculo, on_delete=models.DO_NOTHING, related_name='veiculo')
    funcionario = models.ForeignKey(Funcionario, on_delete=models.DO_NOTHING, related_name='funcionario')
