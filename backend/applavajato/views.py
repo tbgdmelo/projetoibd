@@ -427,3 +427,31 @@ def relatorio_servico_mes(request):
         return render(request, 'applavajato/relatorio_servico.html',{'form':form,'dados':dados})
     else:
         return render(request, 'applavajato/relatorio_servico.html',{'form':form})
+
+#QUERY QUE BUSCA O RESULTADO DO MES DO FUNCIONARIO
+def query_relatorio2(mes,funcionario):
+    intervalo = []
+    intervalo = define_mes(mes)
+    with connection.cursor() as cursor:
+        cursor.execute("select servico.nome as servico,count(servico.nome) as vezes  from nota_fiscal_servicos inner join nota_fiscal on notafiscal_id = id_nota inner join funcionario on funcionario_id = matricula inner join servico on servico_id=id_servico where funcionario.matricula = %s and data_inicio between %s and %s group by servico.nome;", (funcionario, intervalo[0], intervalo[1]))
+        rows = namedtuplefetchall(cursor)
+        #print(rows)
+        return rows
+
+#VIEWS DO RELATORIO 2
+@login_required(login_url='/')
+def relatorio_funcionario(request):
+    form = Relatorio2Form()
+    return render(request, 'applavajato/relatorio_funcionario.html',{'form':form})
+
+@login_required(login_url='/')
+def relatorio_funcionario_mes(request):
+    form = Relatorio2Form()
+    if request.method == "POST":
+        mes = request.POST.get("mes", None)
+        funcionario = request.POST.get("funcionario", None)
+        dados = query_relatorio2(mes, funcionario)
+
+        return render(request, 'applavajato/relatorio_funcionario.html',{'form':form,'dados':dados})
+    else:
+        return render(request, 'applavajato/relatorio_funcionario.html',{'form':form})
