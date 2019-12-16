@@ -18,6 +18,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import connection
 from collections import namedtuple
+
 # Create your views here.
 
 #INICIO
@@ -271,6 +272,7 @@ def delete_cli(request, registro_pessoal):
 @login_required(login_url='/')
 def cadastro_nota(request, registro_pessoal):
     cliente = get_object_or_404(Cliente, registro_pessoal=registro_pessoal)
+    
     if request.method == "POST":
         form = NotaFiscalForm(request.POST)
         if form.is_valid():
@@ -296,7 +298,17 @@ def edit_nota(request, id_nota):
 @login_required(login_url='/')
 def show_nota(request, id_nota):
     nota = get_object_or_404(NotaFiscal, id_nota=id_nota)
-    return render(request, 'applavajato/show_nota.html', {'nota': nota})
+    result = query_transacao_servicos(id_nota)
+    dados =[]
+    dados = list(result)
+    #print(dados)
+    dados = dict(dados)
+    #print(dados)
+    result1 = query_transacao_valor_total(id_nota)
+    dados1 = []
+    dados1 = list(result1)
+    dados1 = dict(dados1)
+    return render(request, 'applavajato/show_nota.html', {'nota': nota, 'dados': dados, 'dados1': dados1})
 
 @login_required(login_url='/')
 def delete_nota(request, id_nota):
@@ -427,3 +439,17 @@ def relatorio_servico_mes(request):
         return render(request, 'applavajato/relatorio_servico.html',{'form':form,'dados':dados})
     else:
         return render(request, 'applavajato/relatorio_servico.html',{'form':form})
+        
+def query_transacao_valor_total(id):
+    with connection.cursor() as cursor:
+        cursor.execute("Select notafiscal_id, sum(valor) as valor_total from servico inner join nota_fiscal_servicos on id_servico = servico_id inner join nota_fiscal on id_nota = notafiscal_id where notafiscal_id = %s;", str(id))
+        rows = cursor.fetchall()
+        print(rows)
+        return rows
+
+def query_transacao_servicos(id):
+    with connection.cursor() as cursor:
+        cursor.execute("Select nome, valor from servico inner join nota_fiscal_servicos on id_servico = servico_id inner join nota_fiscal on id_nota = notafiscal_id where notafiscal_id = %s;", (str(id)))
+        rows = namedtuplefetchall(cursor)
+        print(rows)
+        return rows

@@ -2,6 +2,7 @@ from django import forms
 from applavajato.models import *
 from django.forms import ModelChoiceField
 from django.forms.widgets import HiddenInput
+import datetime
 
 class CustomUserCreationForm(forms.Form):
     NIVEIS=[
@@ -99,7 +100,8 @@ class NotaFiscalForm(forms.ModelForm):
     class Meta:
         model = NotaFiscal
         fields = "__all__"
-        exclude = ("cliente",)
+        exclude = ("cliente",) 
+        
 
 class RelatorioForm(forms.Form):
     MESES=[
@@ -117,3 +119,6 @@ class RelatorioForm(forms.Form):
         [12,"Dezembro"]
     ]
     mes = forms.ChoiceField(choices=MESES,label="Selecione o Mês")
+
+class NotaFiscalVisualizar(forms.Form):
+    troco = forms.DecimalField(label="Troco", required=False)
