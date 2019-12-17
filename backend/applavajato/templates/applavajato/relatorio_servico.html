@@ -1,26 +1,33 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
     <title>Relatório de Servicos</title>
 </head>
 <body>
-    <a style="float: left;" href="/homepage">Página Inicial</a>
+    <div class="ui compact menu">
+        <a class="item" href="/homepage">Página Inicial</a>
+    </div>
+
     <center><h1>Relatório de Serviços</h1></center>
-    <form method="POST" action="/relatorio_servico_mes">
-        {% csrf_token %} 
-        {{ form.as_table }}
-        <button type="submit" >Buscar</button>
+    <form class="ui form" method="POST" action="/relatorio_servico_mes">
+        <div class="two wide field">
+            {% csrf_token %} 
+            {{ form.as_table }}
+        </div>
+        <button class="ui teal button" type="submit" >Buscar</button>
     </form>
     </br>
-    <table>
+    <table class="ui blue collapsing celled table">
         <thead>
             <tr>
-                <th>Serviço</th>
-                <th>Faturamento</th>
-                <th>Qt. Pessoas que Trabalharam</th>
+                <th style="text-align: center;">Serviço</th>
+                <th style="text-align: center;">Faturamento</th>
+                <th style="text-align: center;">Qt. Pessoas que Trabalharam</th>
             </tr>
         </thead>
         <tbody>

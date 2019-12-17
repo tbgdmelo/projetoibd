@@ -1,52 +1,58 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
     <title>Dados do Cliente</title>
 </head>
+    <div class="ui compact menu">
+        <a class="item" href="/homepage">Página Inicial</a>
+    </div>
 <body>
-    <center><h1>Cliente Cadastrado!</h1></center>
+    <center><h1>Cliente Cadastrado</h1></center>
     <h4>Dados do Cliente</h4>
 <body>
-    <form>
+    <form class="ui form">
         {% csrf_token %}  
     <!-- area de campos do form -->
     <hr/>
-    <div>
+    <div class="four wide field">
         <div>
-            </br>
-            <label for="name">Nº de Registro Pessoal:</label>
-            <input disabled="disabled" type="text" name="registro_pessoal" id="id_registro_pessoal"  value="{{ cliente.registro_pessoal }}"/>  
-        </div>
+            <div>
+                </br>
+                <label for="name">Nº de Registro Pessoal:</label>
+                <input disabled="disabled" type="text" name="registro_pessoal" id="id_registro_pessoal"  value="{{ cliente.registro_pessoal }}"/>  
+            </div>
 
-        <div>
-            </br>
-            <label for="name">Nome:</label>
-            <input disabled="disabled" type="text" name="nome" id="id_nome"  value="{{ cliente.nome }}"/>  
-        </div>
+            <div>
+                </br>
+                <label for="name">Nome:</label>
+                <input disabled="disabled" type="text" name="nome" id="id_nome"  value="{{ cliente.nome }}"/>  
+            </div>
 
-        <div>
-            </br>
-            <label for="name">Endereço:</label>
-            <input disabled="disabled" type="text" name="endereco" id="id_endereco"  value="{{ cliente.endereco }}"/> 
-        </div>
+            <div>
+                </br>
+                <label for="name">Endereço:</label>
+                <input disabled="disabled" type="text" name="endereco" id="id_endereco"  value="{{ cliente.endereco }}"/> 
+            </div>
 
-        <div>
-            </br>
-            <label for="name">Telefone 1:</label>
-            <input disabled="disabled" type="text" name="telefone1" id="id_telefone1"  value="{{ cliente.telefone1 }}"/>   
-        </div>
+            <div>
+                </br>
+                <label for="name">Telefone 1:</label>
+                <input disabled="disabled" type="text" name="telefone1" id="id_telefone1"  value="{{ cliente.telefone1 }}"/>   
+            </div>
 
-        <div>
+            <div>
+                </br>
+                <label for="name">Telefone 2:</label>
+                <input disabled="disabled" type="text" name="telefone2" id="id_telefone2"  value="{{ cliente.telefone2 }}"/>  
+            </div>
             </br>
-            <label for="name">Telefone 2:</label>
-            <input disabled="disabled" type="text" name="telefone2" id="id_telefone2"  value="{{ cliente.telefone2 }}"/>  
+            <a class="negative ui button" href='/../show_all_cli'>Voltar</a>
         </div>
-        </br>
-        <a href='/../show_all_cli'>Voltar</a>
-    </div>
     </div>
 </body>
 </html>

@@ -1,19 +1,24 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
     <title>Relatório de Veículo</title>
 </head>
 <body>
-    <a style="float: left;" href="/homepage">Página Inicial</a>
+    <div class="ui compact menu">
+        <a class="item" href="/homepage">Página Inicial</a>
+    </div>
+
     <center><h1>Relatório de Veiculos de Aluguel</h1></center>
-    <table>
+    <table class="ui blue collapsing celled table">
         <thead>
             <tr>
-                <th>Serviço</th>
-                <th>Quantidade de Serviços</th>
+                <th style="text-align: center;">Serviço</th>
+                <th style="text-align: center;">Quantidade de Serviços</th>
             </tr>
         </thead>
     <tbody>

@@ -1,47 +1,53 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
     <title>Atualizar Veiculo</title>
 </head>
+    <div class="ui compact menu">
+        <a class="item" href="/homepage">Página Inicial</a>
+    </div>
 <center><h1>Atualizar dados do Veiculo</h1></center>
 <h4>Dados do Veiculo</h4>
 <body>
-    <form>
+    <form class="ui form">
         {% csrf_token %}  
     <!-- area de campos do form -->
     <hr/>
-    <div>
+    <div class="four wide field">
         <div>
-        </br>
-        <label for="id_placa">Placa:</label>
-        <input disabled="true" type="text" name="placa" id="id_placa"  value="{{ veiculo.placa }}"/>  
-    </div>
-    <div>
-        </br>
-        <label for="id_cor">Cor:</label>
-        <input disabled="true" type="text" name="cor" id="id_cor"  value="{{ veiculo.cor }}"/> 
-    </div>
-    <div>
-        </br>
-        <label for="id_modelo">Modelo:</label>
-        <input disabled="true" type="text" name="modelo" id="id_modelo"  value="{{ veiculo.modelo }}"/>   
-    </div>
-    <div>
-        </br>
-        <label for="id_fabricante">Fabricante:</label>
-        <input disabled="true" type="text" name="fabricante" id="id_fabricante"  value="{{ veiculo.fabricante }}"/>  
-    </div>
-    <div>
-        </br>
-        <label for="id_avarias">Avarias:</label>
-        <input disabled="true" type="text" name="avarias" id="id_avarias"  value="{{ veiculo.avarias }}"/> 
-    </div>
-    <div>
-        <a href='/../show_all_veic'>Voltar</a>
-    </div>
+            <div>
+            </br>
+            <label for="id_placa">Placa:</label>
+            <input disabled="true" type="text" name="placa" id="id_placa"  value="{{ veiculo.placa }}"/>  
+        </div>
+        <div>
+            </br>
+            <label for="id_cor">Cor:</label>
+            <input disabled="true" type="text" name="cor" id="id_cor"  value="{{ veiculo.cor }}"/> 
+        </div>
+        <div>
+            </br>
+            <label for="id_modelo">Modelo:</label>
+            <input disabled="true" type="text" name="modelo" id="id_modelo"  value="{{ veiculo.modelo }}"/>   
+        </div>
+        <div>
+            </br>
+            <label for="id_fabricante">Fabricante:</label>
+            <input disabled="true" type="text" name="fabricante" id="id_fabricante"  value="{{ veiculo.fabricante }}"/>  
+        </div>
+        <div>
+            </br>
+            <label for="id_avarias">Avarias:</label>
+            <input disabled="true" type="text" name="avarias" id="id_avarias"  value="{{ veiculo.avarias }}"/> 
+        </div>
+        <div>
+            <a class="negative ui button" href='/../show_all_veic'>Voltar</a>
+        </div>
     </div>
 </body>
 </html>

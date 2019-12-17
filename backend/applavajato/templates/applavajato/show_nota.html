@@ -1,58 +1,64 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
     <title>Visualizar Nota</title>
 </head>
+    <div class="ui compact menu">
+        <a class="item" href="/homepage">Página Inicial</a>
+    </div>
 <center><h1>Visualizar dados da Nota</h1></center>
 <h4>Dados da Nota</h4>
 <body>
-    <form>
+    <form class="ui form">
         {% csrf_token %}  
     <!-- area de campos do form -->
     <hr/>
-    <div>
+    <div class="four wide field">
         <div>
+            <div>
+            </br>
+            <label for="id_nota">Nº da nota:</label>
+            <input disabled="true" type="text" name="id_nota" id="id_nota"  value="{{ nota.id_nota }}"/>  
+        </div>
+        <div>
+            </br>
+            <label for="id_data">Data de Entrada:</label>
+            <input disabled="true" type="text" name="data_inicio" id="data_inicio"  value="{{ nota.data_inicio }}"/> 
+        </div>
+        <div>
+            </br>
+            <label for="id_finalizacao">Data de finalização:</label>
+            <input disabled="true" type="text" name="data_fim" id="data_fim"  value="{{ nota.data_fim }}"/>   
+        </div>
+        <div>
+            </br>
+            <label for="id_pagamento">Forma de Pagamento:</label>
+            <input disabled="true" type="text" name="forma_pagamento" id="id_pagamento"  value="{{ nota.forma_pagamento }}"/>  
+        </div>
+        <div>
+            </br>
+            <label for="id_cliente">Cliente:</label>
+            <input disabled="true" type="text" name="cliente_id" id="id_cliente"  value="{{ nota.cliente_id }}"/> 
+        </div>
+        <div>
+            </br>
+            <label for="id_funcionario">Funcionario Responsavel:</label>
+            <input disabled="true" type="text" name="funcionario_id" id="id_funcionario"  value="{{ nota.funcionario_id }}"/> 
+        </div>
+        <div>
+            </br>
+            <label for="id_veiculo">Veiculo:</label>
+            <input disabled="true" type="text" name="veiculo_id" id="id_veiculo"  value="{{ nota.veiculo_id }}"/> 
+        </div>
         </br>
-        <label for="id_nota">Nº da nota:</label>
-        <input disabled="true" type="text" name="id_nota" id="id_nota"  value="{{ nota.id_nota }}"/>  
-    </div>
-    <div>
-        </br>
-        <label for="id_data">Data de Entrada:</label>
-        <input disabled="true" type="text" name="data_inicio" id="data_inicio"  value="{{ nota.data_inicio }}"/> 
-    </div>
-    <div>
-        </br>
-        <label for="id_finalizacao">Data de finalização:</label>
-        <input disabled="true" type="text" name="data_fim" id="data_fim"  value="{{ nota.data_fim }}"/>   
-    </div>
-    <div>
-        </br>
-        <label for="id_pagamento">Forma de Pagamento:</label>
-        <input disabled="true" type="text" name="forma_pagamento" id="id_pagamento"  value="{{ nota.forma_pagamento }}"/>  
-    </div>
-    <div>
-        </br>
-        <label for="id_cliente">Cliente:</label>
-        <input disabled="true" type="text" name="cliente_id" id="id_cliente"  value="{{ nota.cliente_id }}"/> 
-    </div>
-    <div>
-        </br>
-        <label for="id_funcionario">Funcionario Responsavel:</label>
-        <input disabled="true" type="text" name="funcionario_id" id="id_funcionario"  value="{{ nota.funcionario_id }}"/> 
-    </div>
-    <div>
-        </br>
-        <label for="id_veiculo">Veiculo:</label>
-        <input disabled="true" type="text" name="veiculo_id" id="id_veiculo"  value="{{ nota.veiculo_id }}"/> 
-    </div>
-    </br>
-    <div>
-        <a href='/../show_all_notas'>Cancelar</a>
-    </div>
+        <div>
+            <a class="negative ui button" href='/../show_all_notas'>Cancelar</a>
+        </div>
     </div>
 </body>
 </html>

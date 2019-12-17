@@ -1,16 +1,21 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
     <title>Clientes Cadastrados</title>
 </head>
-<a style="float: left;" href="/homepage">Página Inicial</a>
+    <div class="ui compact menu">
+        <a class="item" href="/homepage">Página Inicial</a>
+    </div>
+
 <center><h1>Clientes Cadastrados</h1></center>
-<a style="float: right;" href="/deslogar_usuario">Sair do Sistema</a>
+<a class="ui red button" style="float: right;" href="/deslogar_usuario">Sair do Sistema</a>
 <body>
-    <table>
+    <table class="ui blue celled table">
         <thead>
             <tr>
                 <th>Registro Pessoal</th>
@@ -29,12 +34,16 @@
                 <td>{{ cliente.telefone1 }}</td>
                 <td>{{ cliente.telefone2 }}</td>
                 <td>
-                    <a href="/cadastro_veic/{{ cliente.registro_pessoal }}">Add Veículo</a>
-                    <a href="/show_veic_cli/{{ cliente.registro_pessoal }}">Visualizar Veículos</a>
-                    <a href="/cadastro_nota/{{ cliente.registro_pessoal }}">Solicitar/Agendar Serviços</a>
-                    <a href="/show_cli/{{ cliente.registro_pessoal }}">View Cadastro</a>
-                    <a href="/edit_cli/{{ cliente.registro_pessoal }}">Edit. Cadastro</a>
-                    <a href="/delete_cli/{{ cliente.registro_pessoal }}">Del. Cadastro</a>
+                    <div class="small ui buttons">
+                        <a class="ui green basic button" href="/cadastro_veic/{{ cliente.registro_pessoal }}">Add Veículo</a>
+                        <a class="ui blue basic button" href="/show_veic_cli/{{ cliente.registro_pessoal }}">Visualizar Veículos</a>
+                        <a class="ui green basic button" href="/cadastro_nota/{{ cliente.registro_pessoal }}">Solicitar/Agendar Serviços</a>
+                    </div>
+                    <div class="small ui buttons">
+                        <a class="ui blue basic button" href="/show_cli/{{ cliente.registro_pessoal }}">View Cadastro</a>
+                        <a class="ui yellow basic button" href="/edit_cli/{{ cliente.registro_pessoal }}">Edit. Cadastro</a>
+                        <a class="ui red basic button" href="/delete_cli/{{ cliente.registro_pessoal }}">Del. Cadastro</a>
+                    </div>
                 </td>
             </tr>
             {% endfor %}
@@ -42,6 +51,6 @@
     </table>
     <br>
     <br>
-    <center><a href='/cadastro_cli'>Cadastrar Novo Cliente</a></center>
+    <center><a class="ui blue button" href='/cadastro_cli'>Cadastrar Novo Cliente</a></center>
 </body>
 </html>
