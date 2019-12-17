@@ -24,7 +24,7 @@ services:
    restart: always
 
  backend:
-   image: "thidemello/back-lavajato:3.0"
+   image: "thidemello/back-lavajato:4.0"
    container_name: back-lavajato
    command: python manage.py runserver 0.0.0.0:8000
    ports:
