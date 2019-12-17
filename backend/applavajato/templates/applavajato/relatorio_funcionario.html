@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
-    <title>Relatório de Servicos</title>
+    <title>Relatório de Funcionarios</title>
 </head>
 <body>
     <div class="ui compact menu">
         <a class="item" href="/homepage">Página Inicial</a>
     </div>
 
-    <center><h1>Relatório de Serviços</h1></center>
-    <form class="ui form" method="POST" action="/relatorio_servico_mes">
+    <center><h1>Relatório de Funcionários</h1></center>
+    <form class="ui form" method="POST" action="/relatorio_funcionario_mes">
         <div class="two wide field">
             {% csrf_token %} 
             {{ form.as_table }}
@@ -26,16 +26,14 @@
         <thead>
             <tr>
                 <th style="text-align: center;">Serviço</th>
-                <th style="text-align: center;">Faturamento</th>
-                <th style="text-align: center;">Qt. Pessoas que Trabalharam</th>
+                <th style="text-align: center;">Realizou</th>
             </tr>
         </thead>
         <tbody>
             {% for dado in dados %}
                 <tr>
-                    <td style="text-align: center;">{{dado.nome}}</td>
-                    <td style="text-align: center;">{{dado.faturamento}}</td>
-                    <td style="text-align: center;">{{dado.trabalhadores}}</td>
+                    <td style="text-align: center;">{{dado.servico}}</td>
+                    <td style="text-align: center;">{{dado.vezes}}</td>
                 </tr>
             {% endfor %}
         </tbody>

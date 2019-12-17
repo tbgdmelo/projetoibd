@@ -1,70 +1,77 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
+    <title>Dados do funcionário</title>
 </head>
+    <div class="ui compact menu">
+        <a class="item" href="/homepage">Página Inicial</a>
+    </div>
 <body>
-    <center><h1>Funcionário Cadastrado!</h1></center>
+    <center><h1>Funcionário Cadastrado</h1></center>
     <h4>Dados do Funcionário</h4>
 <body>
-    <form>
+    <form class="ui form">
         {% csrf_token %}  
     <!-- area de campos do form -->
     <hr/>
-    <div>
+    <div class="four wide field">
         <div>
-            </br>
-            <label for="name">Matricula:</label>
-            <input disabled="disabled" type="text" name="matricula" id="f_matricula"  value="{{ funcionario.registro_pessoal }}"/>  
-        </div>
+            <div>
+                </br>
+                <label for="name">Matricula:</label>
+                <input disabled="disabled" type="text" name="matricula" id="f_matricula"  value="{{ funcionario.registro_pessoal }}"/>  
+            </div>
 
-        <div>
-            </br>
-            <label for="name">Registro Pessoal:</label>
-            <input disabled="disabled" type="text" name="matricula" id="f_registro"  value="{{ funcionario.registro_pessoal }}"/>  
-        </div>
+            <div>
+                </br>
+                <label for="name">Registro Pessoal:</label>
+                <input disabled="disabled" type="text" name="matricula" id="f_registro"  value="{{ funcionario.registro_pessoal }}"/>  
+            </div>
 
-        <div>
-            </br>
-            <label for="name">Nome:</label>
-            <input disabled="disabled" type="text" name="nome" id="f_nome"  value="{{ funcionario.nome }}"/> 
-        </div>
+            <div>
+                </br>
+                <label for="name">Nome:</label>
+                <input disabled="disabled" type="text" name="nome" id="f_nome"  value="{{ funcionario.nome }}"/> 
+            </div>
 
-        <div>
-            </br>
-            <label for="name">Endereço:</label>
-            <input disabled="disabled" type="text" name="endereco" id="f_endereco"  value="{{ funcionario.endereco }}"/>   
-        </div>
+            <div>
+                </br>
+                <label for="name">Endereço:</label>
+                <input disabled="disabled" type="text" name="endereco" id="f_endereco"  value="{{ funcionario.endereco }}"/>   
+            </div>
 
-        <div>
-            </br>
-            <label for="name">Função:</label>
-            <input disabled="disabled" type="text" name="funcao" id="f_funcao"  value="{{ funcionario.funcao }}"/>  
-        </div>
+            <div>
+                </br>
+                <label for="name">Função:</label>
+                <input disabled="disabled" type="text" name="funcao" id="f_funcao"  value="{{ funcionario.funcao }}"/>  
+            </div>
 
-        <div>
-            </br>
-            <label for="name">Login:</label>
-            <input disabled="disabled" type="text" name="login" id="f_login"  value="{{ funcionario.usuario }}"/> 
-        </div>
+            <div>
+                </br>
+                <label for="name">Login:</label>
+                <input disabled="disabled" type="text" name="login" id="f_login"  value="{{ funcionario.usuario }}"/> 
+            </div>
 
-        <div>
-            </br>
-            <label for="name">Telefone 1:</label>
-            <input disabled="disabled" type="text" name="senha" id="f_tel1"  value="{{ funcionario.telefone1 }}"/> 
-        </div>
+            <div>
+                </br>
+                <label for="name">Telefone 1:</label>
+                <input disabled="disabled" type="text" name="senha" id="f_tel1"  value="{{ funcionario.telefone1 }}"/> 
+            </div>
 
-        <div>
-            </br>
-            <label for="name">Telefone 2:</label>
-            <input disabled="disabled" type="text" name="senha" id="f_tel2"  value="{{ funcionario.telefone2 }}"/> 
+            <div>
+                </br>
+                <label for="name">Telefone 2:</label>
+                <input disabled="disabled" type="text" name="senha" id="f_tel2"  value="{{ funcionario.telefone2 }}"/> 
+            </div>
+            </form>
         </div>
+    </div>
         </br>
-        <a href='/../show_all_func'>Voltar</a>
-    </div>
-    </div>
+        <a class="negative ui button" href='/../show_all_func'>Voltar</a>
 </body>
 </html>

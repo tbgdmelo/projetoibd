@@ -1,15 +1,19 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
     <title>Veículos Cadastrados</title>
 </head>
-<a style="float: left;" href="/homepage">Página Inicial</a>
+    <div class="ui compact menu">
+        <a class="item" href="/homepage">Página Inicial</a>
+    </div>
 <center><h1>Veículos Cadastrados do Cliente</h1></center>
 <body>
-    <table>
+    <table class="ui blue celled table">
         <thead>
             <tr>
                 <th>Placa</th>
@@ -30,9 +34,11 @@
                 <td>{{ veiculo.avarias }}</td>
                 <td>{{ veiculo.tipo_veiculo }}</td>
                 <td>
-                    <a href="/show_veic/{{ veiculo.placa }}">Visualizar</a>
-                    <a href="/edit_veic/{{ veiculo.placa }}">Editar</a>
-                    <a href="/delete_veic/{{ veiculo.placa }}">Deletar</a>
+                    <div class="small ui buttons">
+                        <a class="ui blue basic button" href="/show_veic/{{ veiculo.placa }}">Visualizar</a>
+                        <a class="ui yellow basic button" href="/edit_veic/{{ veiculo.placa }}">Editar</a>
+                        <a class="ui red basic button" href="/delete_veic/{{ veiculo.placa }}">Deletar</a>
+                    </div>
                 </td>
             </tr>
             {% endfor %}
@@ -40,6 +46,6 @@
     </table>
     <br>
     <br>
-    <center><a href='/show_all_cli'>Voltar</a></center>
+    <center><a class="ui blue button" href='/show_all_cli'>Voltar</a></center>
 </body>
 </html>

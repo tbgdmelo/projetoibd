@@ -1,60 +1,66 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
     <title>Atualizar Nota</title>
 </head>
 <center><h1>Atualizar dados da Nota</h1></center>
 <h4>Dados da Nota</h4>
 <body>
-    <form method="POST" action="/update_nota/{{nota.id_nota}}">
+    <form class="ui form" method="POST" action="/update_nota/{{nota.id_nota}}">
         {% csrf_token %}  
     <!-- area de campos do form -->
     <hr/>
-    <div>
+    <div class="four wide field">
         <div>
+            <div>
+            </br>
+            <label for="id_nota">Nº da nota:</label>
+            <input disabled="true" type="text" name="id_nota" id="id_nota"  value="{{ nota.id_nota }}"/>  
+        </div>
+        <div>
+            </br>
+            <label for="id_data">Data de Entrada:</label>
+            <input disabled="true" type="date" name="data_inicio" id="data_entrada"  value="{{ nota.data_entrada }}"/> 
+        </div>
+        <div>
+            </br>
+            <label for="id_finalizacao">Data de finalização:</label>
+            <input type="date" name="data_fim" id="data_fim"  value="{{ nota.data_fim }}"/>   
+        </div>
+        <div>
+            </br>
+            <label for="id_pagamento">Forma de Pagamento:</label>
+            <input type="text" name="forma_pagamento" id="id_pagamento"  value="{{ nota.forma_pagamento }}"/>  
+        </div>
+        <div>
+            </br>
+            <label for="id_cliente">Cliente:</label>
+            <input disabled="true" type="text" name="cliente_id" id="id_cliente"  value="{{ nota.cliente_id }}"/> 
+        </div>
+        <div>
+            </br>
+            <label for="id_funcionario">Funcionario Responsavel:</label>
+            <input disabled="true" type="text" name="funcionario_id" id="id_funcionario"  value="{{ nota.funcionario_id }}"/> 
+        </div>
+        <div>
+            </br>
+            <label for="id_veiculo">Veiculo:</label>
+            <input type="text" name="veiculo_id" id="id_veiculo"  value="{{ nota.veiculo_id }}"/> 
+        </div>
         </br>
-        <label for="id_nota">Nº da nota:</label>
-        <input disabled="true" type="text" name="id_nota" id="id_nota"  value="{{ nota.id_nota }}"/>  
-    </div>
-    <div>
-        </br>
-        <label for="id_data">Data de Entrada:</label>
-        <input disabled="true" type="date" name="data_inicio" id="data_entrada"  value="{{ nota.data_entrada }}"/> 
-    </div>
-    <div>
-        </br>
-        <label for="id_finalizacao">Data de finalização:</label>
-        <input type="date" name="data_fim" id="data_fim"  value="{{ nota.data_fim }}"/>   
-    </div>
-    <div>
-        </br>
-        <label for="id_pagamento">Forma de Pagamento:</label>
-        <input type="text" name="forma_pagamento" id="id_pagamento"  value="{{ nota.forma_pagamento }}"/>  
-    </div>
-    <div>
-        </br>
-        <label for="id_cliente">Cliente:</label>
-        <input disabled="true" type="text" name="cliente_id" id="id_cliente"  value="{{ nota.cliente_id }}"/> 
-    </div>
-    <div>
-        </br>
-        <label for="id_funcionario">Funcionario Responsavel:</label>
-        <input disabled="true" type="text" name="funcionario_id" id="id_funcionario"  value="{{ nota.funcionario_id }}"/> 
-    </div>
-    <div>
-        </br>
-        <label for="id_veiculo">Veiculo:</label>
-        <input type="text" name="veiculo_id" id="id_veiculo"  value="{{ nota.veiculo_id }}"/> 
-    </div>
-    </br>
-    <div>
-        </br>
-        <button type="submit" >Salvar</button>
-        <a href='/../show_all_notas'>Cancelar</a>
-    </div>
+        <div>
+            </br>
+            <div class="ui large buttons">
+                    <button class="ui green button" type="submit" >Salvar</button>
+                    <div class="or"></div>
+                    <a class="ui red button" href="/show_all_notas">Cancelar</a>
+                </div>
+        </div>
     </div>
 </body>
 </html>

@@ -1,39 +1,44 @@
 <!-- <p>Hi, i'm Edit Servico</p> -->
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
     <title>Atualizar Serviço</title>
 </head>
+    <div class="ui compact menu">
+        <a class="item" href="/homepage">Página Inicial</a>
+    </div>
 <center><h1>Atualizar dados do Serviço</h1></center>
 <h4>Dados do Serviço</h4>
 <body>
-  <form>
+  <form class="ui form">
         {% csrf_token %}  
     <!-- area de campos do form -->
     <hr />
-    <div>
+    <div class="four wide field">
         <div>
-            <label for="id_nome">Id do Serviço: </label>
-            <input disabled="true" type="text" name="id_servico" id="id_id_servico"  value="{{ servico.id_servico }}">
-        </div>
-        <div>
-            </br>
-            <label for="id_nome">Nome: </label>
-            <input disabled="disabled" type="text" name="nome" id="id_nome"  value="{{ servico.nome }}">
-        </div>
+            <div>
+                <label for="id_nome">Id do Serviço: </label>
+                <input disabled="true" type="text" name="id_servico" id="id_id_servico"  value="{{ servico.id_servico }}">
+            </div>
+            <div>
+                </br>
+                <label for="id_nome">Nome: </label>
+                <input disabled="disabled" type="text" name="nome" id="id_nome"  value="{{ servico.nome }}">
+            </div>
 
-        <div>
-            </br>
-            <label for="id_valor">Valor: </label>
-            <input disabled="disabled" name="valor" id="id_valor"  value="{{ servico.valor }}">
+            <div>
+                </br>
+                <label for="id_valor">Valor: </label>
+                <input disabled="disabled" name="valor" id="id_valor"  value="{{ servico.valor }}">
+            </div>
         </div>
-    </div>
-    
       </br>
-      <a href='/../show_all_serv'>Voltar</a>
+      <a class="negative ui button" href='/../show_all_serv'>Voltar</a>
     </div>
     
 </form>

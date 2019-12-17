@@ -1,55 +1,61 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
     <title>Atualizar Funcionário</title>
 </head>
 <center><h1>Atualizar dados do Funcionário</h1></center>
 <h4>Dados do Funcionário</h4>
 <body>
-    <form method="POST" action="/update_func/{{funcionario.matricula}}">
+    <form class="ui form" method="POST" action="/update_func/{{funcionario.matricula}}">
         {% csrf_token %}  
     <!-- area de campos do form -->
     <hr/>
-    <div>
+    <div class="four wide field">
         <div>
+            <div>
+            </br>
+            <label for="id_registro_pessoal">Registro Pessoal:</label>
+            <input type="text" name="registro_pessoal" id="id_registro_pessoal"  value="{{ funcionario.registro_pessoal }}"/>  
+        </div>
+        <div>
+            </br>
+            <label for="id_name">Nome:</label>
+            <input type="text" name="nome" id="id_nome"  value="{{ funcionario.nome }}"/> 
+        </div>
+        <div>
+            </br>
+            <label for="id_endereco">Endereço:</label>
+            <input type="text" name="endereco" id="id_endereco"  value="{{ funcionario.endereco }}"/>   
+        </div>
+        <div>
+            </br>
+            <label for="id_funcao">Função:</label>
+            <input type="text" name="funcao" id="id_funcao"  value="{{ funcionario.funcao }}"/>  
+        </div>
+        <div>
+            </br>
+            <label for="id_telefone1">Telefone 1:</label>
+            <input type="text" name="telefone1" id="id_telefone1"  value="{{ funcionario.telefone1 }}"/> 
+        </div>
+        <div>
+            </br>
+            <label for="id_telefone2">Telefone 2:</label>
+            <input type="text" name="telefone2" id="id_telefone2"  value="{{ funcionario.telefone2 }}"/> 
+        </div>
         </br>
-        <label for="id_registro_pessoal">Registro Pessoal:</label>
-        <input type="text" name="registro_pessoal" id="id_registro_pessoal"  value="{{ funcionario.registro_pessoal }}"/>  
-    </div>
-    <div>
-        </br>
-        <label for="id_name">Nome:</label>
-        <input type="text" name="nome" id="id_nome"  value="{{ funcionario.nome }}"/> 
-    </div>
-    <div>
-        </br>
-        <label for="id_endereco">Endereço:</label>
-        <input type="text" name="endereco" id="id_endereco"  value="{{ funcionario.endereco }}"/>   
-    </div>
-    <div>
-        </br>
-        <label for="id_funcao">Função:</label>
-        <input type="text" name="funcao" id="id_funcao"  value="{{ funcionario.funcao }}"/>  
-    </div>
-    <div>
-        </br>
-        <label for="id_telefone1">Telefone 1:</label>
-        <input type="text" name="telefone1" id="id_telefone1"  value="{{ funcionario.telefone1 }}"/> 
-    </div>
-    <div>
-        </br>
-        <label for="id_telefone2">Telefone 2:</label>
-        <input type="text" name="telefone2" id="id_telefone2"  value="{{ funcionario.telefone2 }}"/> 
-    </div>
-    </br>
-    <div>
-        </br>
-        <button type="submit" >Salvar</button>
-        <a href='/../show_all_func'>Cancelar</a>
-    </div>
+        <div>
+            </br>
+            <div class="ui large buttons">
+                    <button class="ui green button" type="submit" >Salvar</button>
+                    <div class="or"></div>
+                    <a class="ui red button" href="/show_all_func">Cancelar</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

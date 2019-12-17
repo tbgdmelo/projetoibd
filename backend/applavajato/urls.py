@@ -50,15 +50,16 @@ urlpatterns = [
     path('delete_nota/<int:id_nota>', views.delete_nota, name='deletar_nota'),
 
     #URLS PARA RELATORIO 1
-
+    path('relatorio_servico', views.relatorio_servico, name='relatorio_servico'),
+    path('relatorio_servico_mes', views.relatorio_servico_mes, name='relatorio_servico_mes'),
+    
     #URLS PARA RELATORIO 2
+    path('relatorio_funcionario',views.relatorio_funcionario, name='relatorio_funcionario'),
+    path('relatorio_funcionario_mes', views.relatorio_funcionario_mes,name='relatorio_funcionario_mes'),
 
     #URLS PARA RELATORIO 3
     path('relatorio_veiculo_pesado', views.relatorio_veiculo_pesado, name='relatorio_pesados'),
     path('relatorio_veiculo_particular', views.relatorio_veiculo_particular, name='relatorio_particular'),
     path('relatorio_veiculo_aluguel', views.relatorio_veiculo_aluguel, name='relatorio_aluguel'),
-
-    #URLS PARA RELATORIO 3
-    path('relatorio_servico', views.relatorio_servico, name='relatorio_servico'),
-    path('relatorio_servico_mes', views.relatorio_servico_mes, name='relatorio_servico_mes'),
+    
 ]

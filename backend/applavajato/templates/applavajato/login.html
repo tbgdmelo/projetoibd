@@ -1,18 +1,29 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
     <title>Sistema Lavajato</title>
 </head>
 <body>
     <center><h3>Login Lavajato</h3>
         <form method="post">
             {% csrf_token %}
-            <p><label>Usuário </label>{{form_login.username}}</p>
-            <p><label>Senha </label>{{form_login.password}}</p>
-	        <button type="submit">ENTRAR</button>
+            <div class="ui form">
+                <div class="four wide field">
+                    <p><label>Usuário </label>{{form_login.username}}</p>
+                </div>
+            </div>
+            <div class="ui form">
+                    <div class="four wide field">
+                    <p><label>Senha </label>{{form_login.password}}</p>
+                </div>
+            </div>
+        </br>
+	        <button class="ui primary button" type="submit">ENTRAR</button>
         </form>
     </center>
 </body>

@@ -1,16 +1,20 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
     <title>Funcionários Cadastrados</title>
 </head>
-<a style="float: left;" href="/homepage">Página Inicial</a>
+    <div class="ui compact menu">
+        <a class="item" href="/homepage">Página Inicial</a>
+    </div>
 <center><h1>Funcionários Cadastrados</h1></center>
-<a style="float: right;" href="/deslogar_usuario">Sair do Sistema</a>
+<a class="ui red button" style="float: right;" href="/deslogar_usuario">Sair do Sistema</a>
 <body>
-    <table>
+    <table class="ui blue celled table">
         <thead>
             <tr>
                 <th>Matricula</th>
@@ -29,9 +33,11 @@
                 <td>{{ funcionario.endereco }}</td>
                 <td>{{ funcionario.funcao }}</td>
                 <td>
-                    <a href="/show_func/{{ funcionario.matricula }}">Visualizar</a>
-                    <a href="/edit_func/{{ funcionario.matricula }}">Editar</a>
-                    <a href="/delete_func/{{ funcionario.matricula }}">Deletar</a>
+                    <div class="small ui buttons">
+                        <a class="ui blue basic button" href="/show_func/{{ funcionario.matricula }}">Visualizar</a>
+                        <a class="ui yellow basic button" href="/edit_func/{{ funcionario.matricula }}">Editar</a>
+                        <a class="ui red basic button" href="/delete_func/{{ funcionario.matricula }}">Deletar</a>
+                    </div>
                 </td>
             </tr>
             {% endfor %}
@@ -39,6 +45,6 @@
     </table>
     <br>
     <br>
-    <center><a href='/cadastro_func'>Cadastrar Novo Funcionário</a></center>
+    <center><a class="ui blue button" href='/cadastro_func'>Cadastrar Novo Funcionário</a></center>
 </body>
 </html>

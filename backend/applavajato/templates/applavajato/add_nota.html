@@ -1,21 +1,27 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static '/semantic.min.css' %}">
     <title>Nova Nota Fiscal</title>
 </head>
 <body>
   <h2>Cadastro de Nota Fiscal</h2>
   <h4>Dados da Nota</h4>
-  <form action="/cadastro_nota/{{cliente.registro_pessoal}}" method="post" enctype="multipart/form-data">
-    {% csrf_token %} 
-    {{ form.as_p }}
-
-  </br>
-  <button type="submit">Salvar</button> <a href="/show_nota"> Cancelar</a>
-  </div>
+  <form class="ui form" action="/cadastro_nota/{{cliente.registro_pessoal}}" method="post" enctype="multipart/form-data">
+    <div class="four wide field">
+      {% csrf_token %} 
+      {{ form.as_p }}
+    </br>
+    <div class="ui large buttons">
+        <button class="ui green button" type="submit" >Salvar</button>
+        <div class="or"></div>
+        <a class="ui red button" href="/show_all_cli">Cancelar</a>
+    </div>
+    </div>
   </form>
 </body>
 </html>
